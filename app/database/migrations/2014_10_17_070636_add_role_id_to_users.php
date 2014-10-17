@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration {
+class AddRoleIdToUsers extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
+		Schema::table('users', function($table)
 		{
-			$table->engine = 'InnoDB';
-			
-			$table->increments('id');
-			$table->string('title');			
+			$table->integer('role_id')->unsigned()->after('id');
+			$table->foreign('role_id')->references('user_id')->on('user_roles');
 		});
 	}
 
@@ -28,7 +26,7 @@ class CreateRolesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		$table->dropColumn('role_id');
 	}
 
 }

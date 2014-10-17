@@ -8,6 +8,11 @@ class Category extends Eloquent
 		return $this->belongsToMany('User', 'advisor_categories');
 	}
 
+	public function appointments()
+	{
+		return $this->hasMany('Appointment');
+	}
+
 }
 
 ?>

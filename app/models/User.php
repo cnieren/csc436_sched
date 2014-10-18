@@ -21,9 +21,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('salt', 'salted_hash');
+	protected $hidden = array('salt','salted_hash');
 
-	public function roles() 
+	public function getAuthPassword()
+	{
+		return $this->attributes['salted_hash'];
+	}
+
+	public function isAdvisor(){
+		return ($this->role_id == 1);
+	}
+
+	public static function advisors(){
+		return static::where('role_id','1')->get();
+	}
+
+	public function roles()
 	{
 		return $this->belongsToMany('Role', 'user_roles');
 	}
@@ -46,5 +59,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function attendees() {
 		return $this->hasMany('Attendee');
 	}
-	
+
 }

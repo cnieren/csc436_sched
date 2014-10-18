@@ -15,8 +15,10 @@ class UserController extends BaseController {
 		// Manually checking hash
 		// if (Auth::attempt(array('email' => $email, 'salted_hash' => $password)))
 		$user = User::where('email', Input::get('email'))->first();
-		if (Hash::check($password,$user->salted_hash))
+		if (Hash::check($password,$user->salted_hash)){
+			Auth::loginUsingId($user->id);
 			return Redirect::to('login')->with('message', 'You are logged in.')->with('error', False);
+		}
 
 		return Redirect::to('login')->with('message', 'Invalid email and password.')->with('error', True);
 	}

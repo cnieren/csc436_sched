@@ -2,9 +2,9 @@
 
 class Appointment extends Eloquent
 {
-	public function event()
+	public function users()
 	{
-		$this->belongsTo('Event');
+		$this->hasMany('User');
 	}
 
 	public function category()
@@ -12,9 +12,6 @@ class Appointment extends Eloquent
 		$this->belongsTo('Category');
 	}
 
-	public static function withUser($user_id){
-		return User::find($user_id)->events;
-	}
 }
 
 ?>

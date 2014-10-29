@@ -16,8 +16,7 @@ class CreateAvailableTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 
-			$table->integer('event_id')->unsigned();
-			$table->foreign('event_id')->references('id')->on('events');
+			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->dateTime('start_time');

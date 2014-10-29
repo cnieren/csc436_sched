@@ -69,15 +69,10 @@ class AppointmentAPIController extends BaseController {
 		}
 
 
-		$event->start = $input['start_time'];
-		$event->event = $input['end_time'];
-		$event->attendees()->attach($input['attendees']);
-		$event->flag_as = "closed";
-
-		$event->save();
-
+		$appointment->start_time = $input['start_time'];
+		$appointment->end_time = $input['end_time'];
 		$appointment->category()->attach($input['category_id']);
-		$appointment->event()->attach($event->id);
+		$appointment->attendees()->attach($input['attendees']);
 		$appointment->save();
 	}
 

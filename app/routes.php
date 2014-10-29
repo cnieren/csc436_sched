@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'UserController@getLogin');
+Route::get('/', 'HomeController@showWelcome');
+
+Route::get('/polymer', 'HomeController@showPolymer');
 
 Route::get('/login', 'UserController@getLogin');
 Route::post('/login', 'UserController@postLogin');
@@ -21,7 +23,7 @@ Route::get('/logout', 'UserController@getLogout');
 
 
 // Main API
-Route::group(array('prefix' => 'api/v1', 'before' => 'auth'), function()
+Route::group(array('prefix' => 'api/v1' /*, 'before' => 'auth'*/), function()
 {
 	Route::resource('user.appointments', 'UserAppointmentAPIController');
 	Route::resource('advisors.available', 'AdvisorAvaiableAPIController');

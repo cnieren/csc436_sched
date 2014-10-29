@@ -1,6 +1,6 @@
 <?php
 
-class Event extends Eloquent 
+class Event extends Eloquent
 {
 
 	public function appointment() {
@@ -11,4 +11,8 @@ class Event extends Eloquent
 		return $this->hasOne('Available');
 	}
 
-?>
+	public function attendees()
+	{
+		return $this->belongsToMany('User', 'attendees', 'event_id', 'user_id');
+	}
+}

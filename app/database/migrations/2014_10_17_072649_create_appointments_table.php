@@ -15,11 +15,13 @@ class CreateAppointmentsTable extends Migration {
 		Schema::create('appointments', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-
+			$table->increments('id');
 			$table->integer('event_id')->unsigned();
 			$table->foreign('event_id')->references('id')->on('events');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('id')->on('categories');
+			$table->dateTime('start_time');
+			$table->dateTime('end_time');
 		});
 	}
 

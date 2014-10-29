@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->string('phone');
 			$table->string('salt', 128);
 			$table->string('salted_hash', 128);
+			$table->string('password', 256);
 			$table->boolean('is_active');
 			$table->timestamps();
 		});

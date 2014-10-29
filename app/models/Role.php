@@ -2,7 +2,7 @@
 
 class Role extends Eloquent {
 
-	public function users() 
+	public function users()
 	{
 		return $this->belongsToMany('User', 'user_roles');
 	}

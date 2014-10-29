@@ -29,16 +29,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function isAdvisor(){
-		return ($this->role_id == 1);
+		$roles = $this->roles;
+		foreach ($roles as $role) {
+			if ($role->id == 1) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static function advisors(){
-		return static::where('role_id','1')->get();
+		return Role::find(1)->users;
 	}
 
 	public function roles()
 	{
-		return $this->belongsToMany('Role', 'user_roles');
+		return $this->belongsToMany('Role', 'user_roles', 'user_id', 'role_id');
 	}
 
 	public function categories()
@@ -56,8 +62,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Available');
 	}
 
-	public function attendees() {
-		return $this->hasMany('Attendee');
+	public function events() {
+		return $this->belongsToMany('Event', 'attendees', 'user_id', 'event_id');
 	}
 
 }

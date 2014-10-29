@@ -10,7 +10,7 @@ class AdvisorAPIController extends BaseController {
 
 	public function index()
 	{
-		$users = Users::advisors();
+		$users = User::advisors();
 		return Response::json($users);
 	}
 
@@ -24,10 +24,10 @@ class AdvisorAPIController extends BaseController {
 	public function show($user_id)
 	{
 		$user = User::find($user_id);
-		if ($user->isAdvisor()) {
-			# code...
+		if ($user && $user->isAdvisor()) {
+			return Response::json($user);
 		}
-		return Response::json($user);
+		return "{}";
 	}
 
 

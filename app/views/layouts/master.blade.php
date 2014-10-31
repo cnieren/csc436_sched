@@ -7,6 +7,7 @@
 	<title>Slate</title>
 
 	{{ HTML::style('assets/bootstrap/css/bootstrap.css') }}
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<!-- navbar --> 
@@ -20,7 +21,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Slate</a>
+				<a class="navbar-brand" href="#"><i class="fa fa-calendar"></i></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->

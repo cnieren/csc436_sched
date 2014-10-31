@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@showWelcome');
+Route::get('/', 'HomeController@showIndex');
 
 Route::get('/polymer', 'HomeController@showPolymer');
 

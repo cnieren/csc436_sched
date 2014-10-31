@@ -15,9 +15,11 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	protected $layout = 'layouts.master';
+
+	public function showIndex()
 	{
-		return View::make('hello');
+		$this->layout->content = View::make('index');
 	}
 
 	public function showPolymer() 

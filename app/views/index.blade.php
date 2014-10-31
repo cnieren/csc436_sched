@@ -1,17 +1,23 @@
 @section('content')
 <div class="jumbotron">
 	<h1>Welcome!</h1>
-	<p>Please complete the following steps below to schedule an appointment with a CS adviser.</p>
+	<p>Please complete the steps below to schedule an appointment with a CS advisor.</p>
 </div>
+{{ Form::open(array('url' => 'foo/bar')) }}	
 <div class="panel panel-primary">
 	<div class="panel-heading"><h3><strong>1. Select a category</strong></h3></div>
 	<div class="panel-body">
+<<<<<<< HEAD
 		<p>What's the reason for your appointment?</p>
 		{{ Form::open(array('url' => 'foo/bar')) }}
 
 			{{ Form::select('category', $category, null, array('class' => 'form-control')); }}
 
 		{{ Form::close() }}
+=======
+		<p>What's the reason for your appointment?</p>			
+		{{ Form::select('categories', $categories, null, array('class' => 'form-control')); }}
+>>>>>>> 69d6502eb5977240a57b854514afbf48cd08ee8c
 	</div>
 </div>
 <div class="panel panel-primary">
@@ -20,6 +26,7 @@
 		<p>Choose an advisor from the list below</p>
 	</div>
 </div>
+<<<<<<< HEAD
 <div class="panel panel-primary">
 	<div class="panel-heading"><h3><strong>#. Select your appointment time</strong></h3></div>
 	<div class="panel-body">
@@ -53,4 +60,7 @@
     </div>
 	</div>
 </div>
+=======
+{{ Form::close() }}
+>>>>>>> 69d6502eb5977240a57b854514afbf48cd08ee8c
 @stop

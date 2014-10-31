@@ -19,9 +19,9 @@ class HomeController extends BaseController {
 
 	public function showIndex()
 	{
-		$category = Category::all()->lists('name', 'id');
+		$categories = Category::all()->lists('name', 'id');
 
-		$this->layout->content = View::make('index', array('category' => $category));
+		$this->layout->content = View::make('index', array('categories' => $categories));
 	}
 
 	public function showPolymer() 

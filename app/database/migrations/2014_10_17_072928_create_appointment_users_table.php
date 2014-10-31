@@ -17,7 +17,7 @@ class CreateAppointmentUsersTable extends Migration {
 			$table->engine = 'InnoDB';
 
 			$table->integer('appointment_id')->unsigned();
-			$table->foreign('appointment_id')->references('event_id')->on('appointments');
+			$table->foreign('appointment_id')->references('id')->on('appointments');
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->boolean('is_advising');

@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Slate</title>
 
-	{{ HTML::style('assets/bootstrap/css/bootstrap.css') }}
+	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -70,6 +70,6 @@
 	</div>
 
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	{{ HTML::script('assets/bootstrap/js/bootstrap.js') }}
+	{{ HTML::script('assets/bootstrap/dist/js/bootstrap.js') }}
 </body>
 </html>

@@ -4,12 +4,12 @@
 	<title>Slate - Polymer Test</title>
 	<meta name="viewport"content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 	
-	{{ HTML::script('assets/bower_components/platform/platform.js') }}
+	{{ HTML::script('assets/platform/platform.js') }}
 
-	<link rel="import" href="/assets/bower_components/font-roboto/roboto.html">
-	<link rel="import" href="/assets/bower_components/core-drawer-panel/core-drawer-panel.html">
-	<link rel="import" href="/assets/bower_components/core-toolbar/core-toolbar.html">
-	<link rel="import" href="/assets/bower_components/core-ajax/core-ajax.html">
+	<link rel="import" href="/assets/font-roboto/roboto.html">
+	<link rel="import" href="/assets/core-drawer-panel/core-drawer-panel.html">
+	<link rel="import" href="/assets/core-toolbar/core-toolbar.html">
+	<link rel="import" href="/assets/core-ajax/core-ajax.html">
 
 	{{ HTML::style('assets/css/styles.css') }}
 

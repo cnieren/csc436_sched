@@ -75,12 +75,10 @@ $(document).ready( function() {
     if(e.keyCode == 37) {
       // left arrow
       calendar.back();
-
     }
     if(e.keyCode == 39) {
       // right arrow
       calendar.forward();
-
     }
   });
 

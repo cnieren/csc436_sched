@@ -1,5 +1,13 @@
 <?php
 
+/*
+*	RUN THE FOLLOWING COMMAND:
+*		
+*		php artisan migrate:refresh --seed --force
+*
+*	TO RE-SEED THE DATABASE. THIS WILL RESET AUTO-INCREMENT COUNTERS.
+*/ 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -11,15 +19,14 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('CategoriesTableSeeder');
-
-		$this->command->info("Categories table seeded!");
+		$this->call('CategoriesTableSeeder');		
+		$this->call('UserTableSeeder');
+		$this->call('RolesTableSeeder');
+		$this->call('UserRolesTableSeeder');				
 	}
-
 }
 
 class CategoriesTableSeeder extends Seeder {
-
 	public function run()
 	{
 		DB::table('categories')->delete();
@@ -38,5 +45,68 @@ class CategoriesTableSeeder extends Seeder {
 		Category::create(array('name' => 'Undergrad: Prospective CS major '));
 		Category::create(array('name' => 'Undergrad: Transfer Course Pre-Approval '));
 		Category::create(array('name' => 'Undergrad: UA Readmission/Returning'));
+	}
+}
+
+class UserTableSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('users')->delete();
+
+		User::create(array('fname' => 'Homero',
+									'lname' => 'Pawlowski',
+									'email' => 'homeski@email.arizona.edu',
+									'phone' => '520555555',
+									'salt' => 'blah',
+									'salted_hash' => 'bl4h',
+									'password' => '614h',
+									'is_active' => true									
+									));
+
+		User::create(array('fname' => 'Timmy',
+									'lname' => 'Garrabrant',
+									'email' => 'timmy@email.arizona.edu',
+									'phone' => '520555556',
+									'salt' => 'blah',
+									'salted_hash' => 'bl4h',
+									'password' => '614h',
+									'is_active' => true									
+									));
+
+		User::create(array('fname' => 'Chad',
+									'lname' => 'Nierenhousen',
+									'email' => 'chad@email.arizona.edu',
+									'phone' => '520555557',
+									'salt' => 'blah',
+									'salted_hash' => 'bl4h',
+									'password' => '614h',
+									'is_active' => true									
+									));
+	}
+}
+
+class RolesTableSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('roles')->delete();
+
+		Role::create(array('title' => 'Student'));
+		Role::create(array('title' => 'Advisor'));
+	}
+}
+
+class UserRolesTableSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('user_roles')->delete();
+
+		DB::table('user_roles')->insert(array('user_id' => '1',
+															'role_id' => '1'));
+
+		DB::table('user_roles')->insert(array('user_id' => '2',
+															'role_id' => '2'));
+
+		DB::table('user_roles')->insert(array('user_id' => '3',
+															'role_id' => '2'));
 	}
 }

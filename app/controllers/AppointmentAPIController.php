@@ -93,6 +93,7 @@ class AppointmentAPIController extends BaseController {
 		$user = User::find($input['studentId']);
 		$std_appt = $user->appointments()->save($appointment);
 
+		// DOES NOT CURRENTLY SET 'is_advising' correctly ... need to fix
 		$advisor = User::find($input['advisor']);
 		$adv_appt = $advisor->appointments()->save($appointment);
 	}

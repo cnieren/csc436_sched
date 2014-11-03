@@ -19,11 +19,9 @@ class HomeController extends BaseController {
 
 	public function showIndex()
 	{
-		$categories = Category::categories()->lists('name', 'id');
-		$advisors = User::advisors();
+		$categories = Category::categories();
 
 		$this->layout->content = View::make('index', 
-			array('categories' => $categories,
-				'advisors' => $advisors));
+			array('categories' => $categories));
 	}
 }

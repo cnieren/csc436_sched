@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CategoriesTableSeeder');		
 		$this->call('UserTableSeeder');
 		$this->call('RolesTableSeeder');
-		$this->call('UserRolesTableSeeder');				
+		$this->call('UserRolesTableSeeder');
+		$this->call('AdvisorCategoriesSeeder');
 	}
 }
 
@@ -100,13 +101,33 @@ class UserRolesTableSeeder extends Seeder {
 	{
 		DB::table('user_roles')->delete();
 
+		// Homero is a student
 		DB::table('user_roles')->insert(array('user_id' => '1',
 															'role_id' => '1'));
-
+		// Timmy is an advisor
 		DB::table('user_roles')->insert(array('user_id' => '2',
 															'role_id' => '2'));
-
+		// Chad is an advisor
 		DB::table('user_roles')->insert(array('user_id' => '3',
 															'role_id' => '2'));
+	}
+}
+
+class AdvisorCategoriesSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('advisor_categories')->delete();
+
+		DB::table('advisor_categories')->insert(array('user_id' => '2',
+																		'category_id' => '1'));
+
+		DB::table('advisor_categories')->insert(array('user_id' => '2',
+																		'category_id' => '2'));
+
+		DB::table('advisor_categories')->insert(array('user_id' => '3',
+																		'category_id' => '2'));
+
+		DB::table('advisor_categories')->insert(array('user_id' => '3',
+																		'category_id' => '3'));
 	}
 }

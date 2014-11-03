@@ -1,6 +1,6 @@
 <?php
 
-class AdvisorAvaiableAPIController extends BaseController {
+class AdvisorAvailableAPIController extends BaseController {
 
 	/**
 	 * Display a listing of Appointments under the Currently Logged User.

@@ -31,7 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function isAdvisor(){
 		$roles = $this->roles;
 		foreach ($roles as $role) {
-			if ($role->id == 1) {
+			if ($role->id == 2) {
 				return true;
 			}
 		}

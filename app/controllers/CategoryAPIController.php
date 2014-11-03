@@ -11,6 +11,8 @@ class CategoryAPIController extends BaseController {
 
 	public function index()
 	{
+		$categories = Category::categories();
+		return Response::json($categories);
 	}
 
 	/**

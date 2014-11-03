@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AdvisorCategoriesSeeder');
 		$this->call('AvailableSeeder');
 		$this->call('AppointmentsSeeder');
+		$this->call('AppointmentUsersSeeder');
 	}
 }
 
@@ -202,5 +203,36 @@ class AppointmentsSeeder extends Seeder {
 		Appointment::create(array('category_id' => '3',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));		
+	}
+}
+
+class AppointmentUsersSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('appointment_users')->delete();
+
+		// Homero is attending appointment 1
+		DB::table('appointment_users')->insert(array('appointment_id' => '1',
+																		'user_id' => '1',
+																		'is_advising' => false));
+		// Timmy is advising appointment 1
+		DB::table('appointment_users')->insert(array('appointment_id' => '1',
+																		'user_id' => '2',
+																		'is_advising' => true));		
+
+		// Homero is attending appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '1',
+																		'is_advising' => false));
+
+		// Timmy is advising appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '2',
+																		'is_advising' => true));	
+
+		// Chad is also advising appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '3',
+																		'is_advising' => true));	
 	}
 }

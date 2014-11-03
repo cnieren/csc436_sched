@@ -9,6 +9,7 @@
 	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
 	{{ HTML::style('css/cal.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	{{ HTML::style('css/styles.css') }}
 </head>
 <body>
 	<!-- navbar -->
@@ -72,9 +73,12 @@
 
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-	{{ HTML::script('assets/bootstrap/dist/js/bootstrap.js') }}
-	{{ HTML::script('assets/moment/moment.js') }}
+	{{ HTML::script('assets/handlebars/handlebars.min.js') }}
+	{{ HTML::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
+	{{ HTML::script('assets/moment/min/moment.min.js') }}
 	{{ HTML::script('assets/clndr/clndr.min.js') }}
+
+	{{ HTML::script('js/handlebarsHelpers.js') }}
 	{{ HTML::script('js/main.js') }}
 </body>
 </html>

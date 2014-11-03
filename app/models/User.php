@@ -39,7 +39,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public static function advisors(){
-		return Role::find(1)->users;
+		return Role::find(2)->users;
 	}
 
 	public function roles()

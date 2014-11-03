@@ -8,9 +8,10 @@
 	<div class="panel-body">
 		<p>What's the reason for your appointment?</p>
         <select id="category" class="form-control">
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
+        	<option selected disabled>Please Select</option>
+				@foreach($categories as $category)
+				   <option value="{{ $category->id }}">{{ $category->name }}</option>
+				@endforeach
         </select>
 	</div>
 </div>

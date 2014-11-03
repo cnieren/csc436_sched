@@ -1,5 +1,9 @@
 <?php
 
+require 'vendor/autoload.php';
+
+use Carbon\Carbon;
+
 class AppointmentAPIController extends BaseController {
 
 	/**
@@ -26,11 +30,13 @@ class AppointmentAPIController extends BaseController {
 	public function show($appointment_id)
 	{
 		$appointment = Appointment::find($appointment_id);
-		return Response::json($appointments);
+		return Response::json($appointment);
 	}
 
 	/**
 	 * Store a newly created appointment in storage.
+	 *
+	 * Should have: category, advisor, studentId, startTime, endTime
 	 *
 	 * @return Response
 	 *
@@ -38,42 +44,57 @@ class AppointmentAPIController extends BaseController {
 
 	public function store()
 	{
-		$appointment = new Appointment;
-		$event = new Event;
+		$appointment = new Appointment;		
 		$input = Input::all();
 
 		//Check Required
-		if(!array_key_exists('category_id', $input)){
+		if(!array_key_exists('category', $input)){
 			return Response::json(array(
-				'message' => 'Missing category_id'),
+				'message' => 'Missing category'),
 				400
 			);
 		}
-		elseif(!array_key_exists('start_time', $input)){
+		elseif(!array_key_exists('advisor', $input)){
 			return Response::json(array(
-				'message' => 'Missing start_time'),
+				'message' => 'Missing advisor'),
+				400
+			);
+		}		
+		elseif(!array_key_exists('startTime', $input)){
+			return Response::json(array(
+				'message' => 'Missing startTime'),
 				400
 			);
 		}
-		elseif(!array_key_exists('end_time', $input)){
+		elseif(!array_key_exists('endTime', $input)){
 			return Response::json(array(
-				'message' => 'Missing end_time'),
+				'message' => 'Missing endTime'),
 				400
 			);
 		}
-		elseif(!array_key_exists('attendees', $input)){
+		elseif(!array_key_exists('studentId', $input)){
 			return Response::json(array(
-				'message' => 'Missing attendees'),
+				'message' => 'Missing studentId'),
 				400
 			);
 		}
 
+		$dt_start = Carbon::now();
+		$dt_end = Carbon::now();
 
-		$appointment->start_time = $input['start_time'];
-		$appointment->end_time = $input['end_time'];
-		$appointment->category()->attach($input['category_id']);
-		$appointment->attendees()->attach($input['attendees']);
+		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
+		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+
+		$appointment->category_id = $input['category'];
+		$appointment->start_time = $dt_start;
+		$appointment->end_time = $dt_end;
 		$appointment->save();
+
+		$user = User::find($input['studentId']);
+		$std_appt = $user->appointments()->save($appointment);
+
+		$advisor = User::find($input['advisor']);
+		$adv_appt = $advisor->appointments()->save($appointment);
 	}
 
 	/**

@@ -14,16 +14,19 @@ class CategoryAdvisorAPIController extends BaseController {
 	}
 
 	/**
-	 * Display the specified appointment.
+	 * Returns all advisors that belong to the
+	 * given category ID
 	 *
-	 * @param  int  $appointment_id
+	 * @param  int  $category_id
 	 * @return Response
 	 *
 	 */
 
-	public function show($appointment_id)
+	public function show($cat_id)
 	{
+		$advisors = Category::find($cat_id)->users;
 
+		return Response::json($advisors);
 	}
 
 	/**

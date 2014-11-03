@@ -99,12 +99,10 @@
         my.advisorId = this.options[this.selectedIndex].value;
         var url = 'api/v1/advisors/' + my.advisorId + '/available/*';
         get(url).then(function(data) {
+          calendarManager.remove();
           calendarManager.updateAvailables(data);
+          calendarManager.bindActions();
         });
-
-        calendarManager.remove();
-        calendarManager.showSection();
-        calendarManager.bindActions();
       },
 
       advisers: function(data) {
@@ -146,11 +144,11 @@
       bindActions: function() {
         $(my.calendar).clndr();
       },
-      showSection: function() {
+      showSection: function(data) {
         var prevSection = adviserManager.section(),
           tmpl = Handlebars.getTemplate(my.template);
 
-        prevSection.insertAdjacentHTML('afterend', tmpl());
+        prevSection.insertAdjacentHTML('afterend', tmpl(JSON.parse(data)));
         my.section = document.getElementsByClassName('panel')[2];
         my.calendar = document.getElementById('cal');
         my.times = my.section.querySelectorAll('select')[0];
@@ -162,7 +160,7 @@
         el.parentNode.removeChild(el);
       },
       updateAvailables: function(data) {
-        console.log(data);
+        this.showSection(data);
       }
     };
 

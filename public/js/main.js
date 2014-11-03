@@ -78,7 +78,8 @@
       section: null,
       selector: null,
       template: 'adviser',
-      advisers: []
+      advisers: [],
+      advisorId: null,
     },
     that = {
       bindActions: function() {
@@ -95,6 +96,12 @@
       },
 
       adviserChosen: function() {
+        my.advisorId = this.options[this.selectedIndex].value;
+        var url = 'api/v1/advisors/' + my.advisorId + '/available/*';
+        get(url).then(function(data) {
+          calendarManager.updateAvailables(data);
+        });
+
         calendarManager.remove();
         calendarManager.showSection();
         calendarManager.bindActions();
@@ -153,6 +160,9 @@
         
         var el = my.section;
         el.parentNode.removeChild(el);
+      },
+      updateAvailables: function(data) {
+        console.log(data);
       }
     };
 

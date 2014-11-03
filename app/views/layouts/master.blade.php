@@ -7,7 +7,7 @@
 	<title>Slate</title>
 
 	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
-	{{ HTML::style('assets/css/cal.css') }}
+	{{ HTML::style('css/cal.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -73,8 +73,8 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 	{{ HTML::script('assets/bootstrap/dist/js/bootstrap.js') }}
-	{{ HTML::script('assets/js/moment-2.8.3.js') }}
-	{{ HTML::script('assets/js/clndr.min.js') }}
-	{{ HTML::script('assets/js/main.js') }}
+	{{ HTML::script('assets/moment/moment.js') }}
+	{{ HTML::script('assets/clndr/clndr.min.js') }}
+	{{ HTML::script('js/main.js') }}
 </body>
 </html>

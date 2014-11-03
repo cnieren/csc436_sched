@@ -53,7 +53,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<!-- <li><a href="#">Link</a></li> -->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $user->fname }}  {{ $user->lname }}<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">Logout</a></li>
 							<!-- <li><a href="#">Another action</a></li>

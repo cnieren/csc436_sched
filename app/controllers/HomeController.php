@@ -23,10 +23,4 @@ class HomeController extends BaseController {
 
 		$this->layout->content = View::make('index', array('categories' => $categories));
 	}
-
-	public function showPolymer() 
-	{
-		return View::make('polymer-test');
-	}
-
 }

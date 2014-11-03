@@ -13,8 +13,6 @@
 
 Route::get('/', 'HomeController@showIndex');
 
-Route::get('/polymer', 'HomeController@showPolymer');
-
 Route::get('/login', 'UserController@getLogin');
 Route::post('/login', 'UserController@postLogin');
 Route::get('/register', 'UserController@getRegister');

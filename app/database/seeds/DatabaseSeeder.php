@@ -1,5 +1,9 @@
 <?php
 
+require 'vendor/autoload.php';
+
+use Carbon\Carbon;
+
 /*
 *	RUN THE FOLLOWING COMMAND:
 *		
@@ -24,6 +28,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('RolesTableSeeder');
 		$this->call('UserRolesTableSeeder');
 		$this->call('AdvisorCategoriesSeeder');
+		$this->call('AvailableSeeder');
 	}
 }
 
@@ -129,5 +134,42 @@ class AdvisorCategoriesSeeder extends Seeder {
 
 		DB::table('advisor_categories')->insert(array('user_id' => '3',
 																		'category_id' => '3'));
+	}
+}
+
+class AvailableSeeder extends Seeder {
+	public function run()
+	{
+		$dt_start = Carbon::now();
+		$dt_end = Carbon::now();
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(9)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+
+		Available::create(array('user_id' => '2',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(5)->minute(0)->second(0);
+
+		Available::create(array('user_id' => '2',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
+
+		Available::create(array('user_id' => '3',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(3)->minute(15)->second(0);
+
+		Available::create(array('user_id' => '3',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));		
+
 	}
 }

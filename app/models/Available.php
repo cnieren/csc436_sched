@@ -2,11 +2,7 @@
 
 class Available extends Eloquent
 {
-
-	public function event()
-	{
-		$this->belongsTo('Event');
-	}
+	public $timestamps = false;
 
 	public function user()
 	{

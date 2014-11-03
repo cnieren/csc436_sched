@@ -12,7 +12,7 @@ class CreateAvailableTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('available', function(Blueprint $table)
+		Schema::create('availables', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 
@@ -31,7 +31,7 @@ class CreateAvailableTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('available');
+		Schema::drop('availables');
 	}
 
 }

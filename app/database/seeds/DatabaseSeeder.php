@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UserRolesTableSeeder');
 		$this->call('AdvisorCategoriesSeeder');
 		$this->call('AvailableSeeder');
+		$this->call('AppointmentsSeeder');
+		$this->call('AppointmentUsersSeeder');
 	}
 }
 
@@ -123,15 +125,19 @@ class AdvisorCategoriesSeeder extends Seeder {
 	{
 		DB::table('advisor_categories')->delete();
 
+		// Timmy belongs to Accelerated Masters Program category
 		DB::table('advisor_categories')->insert(array('user_id' => '2',
 																		'category_id' => '1'));
 
+		// Timmy belongs to Graduate Students: Assistantship
 		DB::table('advisor_categories')->insert(array('user_id' => '2',
 																		'category_id' => '2'));
 
+		// Chad belongs to Graduate Students: Assistantship
 		DB::table('advisor_categories')->insert(array('user_id' => '3',
 																		'category_id' => '2'));
 
+		// Chad belongs to Graduate Students: Plan of Study
 		DB::table('advisor_categories')->insert(array('user_id' => '3',
 																		'category_id' => '3'));
 	}
@@ -146,13 +152,15 @@ class AvailableSeeder extends Seeder {
 		$dt_start->year(2014)->month(11)->day(3)->hour(9)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
 
+		// Timmy
 		Available::create(array('user_id' => '2',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(5)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(17)->minute(0)->second(0);
 
+		// Timmy
 		Available::create(array('user_id' => '2',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
@@ -160,16 +168,71 @@ class AvailableSeeder extends Seeder {
 		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
 
+		// Chad
 		Available::create(array('user_id' => '3',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(3)->minute(15)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(15)->minute(15)->second(0);
 
+		// Chad
 		Available::create(array('user_id' => '3',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));		
 
+	}
+}
+
+class AppointmentsSeeder extends Seeder {
+	public function run()
+	{
+		$dt_start = Carbon::now();
+		$dt_end = Carbon::now();
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(9)->minute(15)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+
+		Appointment::create(array('category_id' => '1',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));
+
+		$dt_start->year(2014)->month(11)->day(3)->hour(13)->minute(0)->second(0);
+		$dt_end->year(2014)->month(11)->day(3)->hour(14)->minute(0)->second(0);
+
+		Appointment::create(array('category_id' => '3',
+											'start_time' => $dt_start,
+											'end_time' => $dt_end));		
+	}
+}
+
+class AppointmentUsersSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('appointment_users')->delete();
+
+		// Homero is attending appointment 1
+		DB::table('appointment_users')->insert(array('appointment_id' => '1',
+																		'user_id' => '1',
+																		'is_advising' => false));
+		// Timmy is advising appointment 1
+		DB::table('appointment_users')->insert(array('appointment_id' => '1',
+																		'user_id' => '2',
+																		'is_advising' => true));		
+
+		// Homero is attending appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '1',
+																		'is_advising' => false));
+
+		// Timmy is advising appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '2',
+																		'is_advising' => true));	
+
+		// Chad is also advising appointment 2
+		DB::table('appointment_users')->insert(array('appointment_id' => '2',
+																		'user_id' => '3',
+																		'is_advising' => true));	
 	}
 }

@@ -24,7 +24,7 @@ Route::get('/logout', 'UserController@getLogout');
 Route::group(array('prefix' => 'api/v1' /*, 'before' => 'auth'*/), function()
 {
 	Route::resource('advisors.appointments', 'AdvisorAppointmentAPIController');
-	Route::resource('advisors.available', 'AdvisorAvaiableAPIController');
+	Route::resource('advisors.available', 'AdvisorAvailableAPIController');
 	Route::resource('advisors', 'AdvisorAPIController');
 	Route::resource('appointments', 'AppointmentAPIController');
 	Route::resource('categories.advisors', 'CategoryAdvisorAPIController');

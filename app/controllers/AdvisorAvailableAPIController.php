@@ -21,9 +21,11 @@ class AdvisorAvailableAPIController extends BaseController {
 	 *
 	 */
 
-	public function show($appointment_id)
+	public function show($advisor_id)
 	{
+		$advisor = User::find($advisor_id);
 
+		return $advisor->availables;		
 	}
 
 	/**

@@ -21,11 +21,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('salt','salted_hash');
+	protected $hidden = array('password');
 
 	public function getAuthPassword()
 	{
-		return $this->attributes['salted_hash'];
+		return $this->attributes['password'];
 	}
 
 	public function isAdvisor(){

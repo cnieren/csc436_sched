@@ -6,11 +6,11 @@ use Carbon\Carbon;
 
 /*
 *	RUN THE FOLLOWING COMMAND:
-*		
+*
 *		php artisan migrate:refresh --seed --force
 *
 *	TO RE-SEED THE DATABASE. THIS WILL RESET AUTO-INCREMENT COUNTERS.
-*/ 
+*/
 
 class DatabaseSeeder extends Seeder {
 
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('CategoriesTableSeeder');		
+		$this->call('CategoriesTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('RolesTableSeeder');
 		$this->call('UserRolesTableSeeder');
@@ -65,30 +65,24 @@ class UserTableSeeder extends Seeder {
 									'lname' => 'Pawlowski',
 									'email' => 'homeski@email.arizona.edu',
 									'phone' => '520555555',
-									'salt' => 'blah',
-									'salted_hash' => 'bl4h',
 									'password' => '614h',
-									'is_active' => true									
+									'is_active' => true
 									));
 
 		User::create(array('fname' => 'Timmy',
 									'lname' => 'Garrabrant',
 									'email' => 'timmy@email.arizona.edu',
 									'phone' => '520555556',
-									'salt' => 'blah',
-									'salted_hash' => 'bl4h',
 									'password' => '614h',
-									'is_active' => true									
+									'is_active' => true
 									));
 
 		User::create(array('fname' => 'Chad',
 									'lname' => 'Nierenhousen',
 									'email' => 'chad@email.arizona.edu',
 									'phone' => '520555557',
-									'salt' => 'blah',
-									'salted_hash' => 'bl4h',
 									'password' => '614h',
-									'is_active' => true									
+									'is_active' => true
 									));
 	}
 }
@@ -179,7 +173,7 @@ class AvailableSeeder extends Seeder {
 		// Chad
 		Available::create(array('user_id' => '3',
 											'start_time' => $dt_start,
-											'end_time' => $dt_end));		
+											'end_time' => $dt_end));
 
 	}
 }
@@ -202,7 +196,7 @@ class AppointmentsSeeder extends Seeder {
 
 		Appointment::create(array('category_id' => '3',
 											'start_time' => $dt_start,
-											'end_time' => $dt_end));		
+											'end_time' => $dt_end));
 	}
 }
 
@@ -218,7 +212,7 @@ class AppointmentUsersSeeder extends Seeder {
 		// Timmy is advising appointment 1
 		DB::table('appointment_users')->insert(array('appointment_id' => '1',
 																		'user_id' => '2',
-																		'is_advising' => true));		
+																		'is_advising' => true));
 
 		// Homero is attending appointment 2
 		DB::table('appointment_users')->insert(array('appointment_id' => '2',
@@ -228,11 +222,11 @@ class AppointmentUsersSeeder extends Seeder {
 		// Timmy is advising appointment 2
 		DB::table('appointment_users')->insert(array('appointment_id' => '2',
 																		'user_id' => '2',
-																		'is_advising' => true));	
+																		'is_advising' => true));
 
 		// Chad is also advising appointment 2
 		DB::table('appointment_users')->insert(array('appointment_id' => '2',
 																		'user_id' => '3',
-																		'is_advising' => true));	
+																		'is_advising' => true));
 	}
 }

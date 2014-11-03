@@ -13,9 +13,9 @@ class UserController extends BaseController {
 		$password = Request::get('password');
 
 		// Manually checking hash
-		// if (Auth::attempt(array('email' => $email, 'salted_hash' => $password)))
+		// if (Auth::attempt(array('email' => $email, 'password' => $password)))
 		$user = User::where('email', Input::get('email'))->first();
-		if (Hash::check($password,$user->salted_hash)){
+		if (Hash::check($password,$user->password)){
 			Auth::loginUsingId($user->id);
 			return Redirect::to('login')->with('message', 'You are logged in.')->with('error', False);
 		}
@@ -49,7 +49,7 @@ class UserController extends BaseController {
 			$user->Lname = Input::get('last_name');
 			$user->Email = Input::get('email');
 			$user->Phone = Input::get('phone');
-			$user->salted_hash = Hash::make(Input::get('password'));
+			$user->password = Hash::make(Input::get('password'));
 			$user->is_active = 1;
 			$user->save();
 

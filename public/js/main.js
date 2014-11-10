@@ -40,6 +40,7 @@
         var url = 'api/v1/categories/' + my.categoryId + '/advisors/*';
 
         get(url).then(function(data) {
+          adviserManager.remove();
           adviserManager.showSection(data);
           adviserManager.bindActions();
         });
@@ -124,9 +125,11 @@
       },
 
       remove: function() {
+        if (my.section === null) return;
+
         var el = my.section;
-        el.parentNode.removeChild(el);
-        calendar.remove();
+        el.remove();
+        calendarManager.remove();        
       }
     };
 
@@ -146,7 +149,7 @@
       },
       showSection: function(data) {
         var prevSection = adviserManager.section(),
-          tmpl = Handlebars.getTemplate(my.template);
+        tmpl = Handlebars.getTemplate(my.template);
 
         prevSection.insertAdjacentHTML('afterend', tmpl(JSON.parse(data)));
         my.section = document.getElementsByClassName('panel')[2];
@@ -157,7 +160,7 @@
         if(my.section === null) return;
         
         var el = my.section;
-        el.parentNode.removeChild(el);
+        el.remove();        
       },
       updateAvailables: function(data) {
         this.showSection(data);

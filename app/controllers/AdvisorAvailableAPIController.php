@@ -16,12 +16,14 @@ class AdvisorAvailableAPIController extends BaseController {
 	}
 
 	/**
-	 * Display the specified appointment.
+	 * Returns either all availables for the passed in advisor_id
+	 * OR will return only availables for the passed in advisor_id and filter_date
 	 *
-	 * @param  int  $advisor_id, string date
+	 * @param  int  $advisor_id, string filter_date
 	 * @return Response
 	 *
 	 * api/v1/advisors/2/available/*
+	 * api/v1/advisors/2/available/2014-11-17
 	 */
 
 	public function show($advisor_id, $filter_date)

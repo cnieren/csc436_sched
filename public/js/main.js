@@ -165,12 +165,11 @@
       updateAvailables: function(data) {
         this.showSection(data);
       },
-      setupClndr: function() {
-        console.log('harrro');
+      setupClndr: function() {        
         $(my.calendar).clndr({
           clickEvents: {
             click: function(target) {
-              console.log(target);
+                console.log(target.date._i);
 
                 calendarManager.remove();
                 calendarManager.updateAvailables(null);

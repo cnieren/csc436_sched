@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@showIndex');
 
 Route::get('/login', 'UserController@getLogin');
 Route::post('/login', 'UserController@postLogin');
@@ -19,16 +18,22 @@ Route::get('/register', 'UserController@getRegister');
 Route::post('/register', 'UserController@postRegister');
 Route::get('/logout', 'UserController@getLogout');
 
-
-// Main API
-Route::group(array('prefix' => 'api/v1' /*, 'before' => 'auth'*/), function()
+Route::group(array('before' => 'auth'), function()
 {
-	Route::resource('advisors.appointments', 'AdvisorAppointmentAPIController');
-	Route::resource('advisors.available', 'AdvisorAvailableAPIController');
-	Route::resource('advisors', 'AdvisorAPIController');
-	Route::resource('appointments', 'AppointmentAPIController');
-	Route::resource('categories.advisors', 'CategoryAdvisorAPIController');
-	Route::resource('categories', 'CategoryAPIController');
-	Route::resource('users', 'UserAPIController');
+
+	Route::get('/', 'HomeController@showIndex');
+
+	// Main API
+	Route::group(array('prefix' => 'api/v1'), function()
+	{
+
+		Route::resource('advisors.appointments', 'AdvisorAppointmentAPIController');
+		Route::resource('advisors.available', 'AdvisorAvailableAPIController');
+		Route::resource('advisors', 'AdvisorAPIController');
+		Route::resource('appointments', 'AppointmentAPIController');
+		Route::resource('categories.advisors', 'CategoryAdvisorAPIController');
+		Route::resource('categories', 'CategoryAPIController');
+		Route::resource('users', 'UserAPIController');
+	});
 });
 

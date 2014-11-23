@@ -1,10 +1,14 @@
 <?php
 class UserController extends BaseController {
 
+	protected $layout = 'layouts.master';
+
 	public function getLogin()
 	{
 		$data = array();
-		return View::make('users.login',$data);
+		$data['user'] = Auth::user();
+
+		$this->layout->content = View::make('users.login',$data);
 	}
 
 	public function postLogin()
@@ -13,14 +17,12 @@ class UserController extends BaseController {
 		$password = Request::get('password');
 
 		// Manually checking hash
-		// if (Auth::attempt(array('email' => $email, 'password' => $password)))
-		$user = User::where('email', Input::get('email'))->first();
-		if (Hash::check($password,$user->password)){
-			Auth::loginUsingId($user->id);
-			return Redirect::to('login')->with('message', 'You are logged in.')->with('error', False);
+		if (Auth::attempt(array('email' => $email, 'password' => $password))){
+			return Redirect::to('/')->with('message', 'You are logged in.')->with('error', False);
+		}else{
+			return Redirect::to('login')->with('message', 'Invalid email and password.')->with('error', True);
 		}
 
-		return Redirect::to('login')->with('message', 'Invalid email and password.')->with('error', True);
 	}
 	public function getLogout()
 	{
@@ -32,7 +34,7 @@ class UserController extends BaseController {
 	public function getRegister()
 	{
 		$data = array();
-		return View::make('users.register',$data);
+		$this->layout->content = View::make('users.register',$data);
 	}
 
 

@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-</head>
-<body>
+@section('content')
 @if(Session::has('message') && Session::has('error'))
 	@if(Session::get('error'))
 	<p class="alert alert-danger" role="alert">{{ Session::get('message') }}</p>
@@ -22,6 +17,4 @@
     {{ Form::password('password_rt', array('class'=>'form-control', 'placeholder'=>'Password Confirm')) }}<br>
     {{ Form::submit('Create Account', array('class'=>'btn btn-large btn-primary btn-block'))}}
 {{ Form::close() }}
-
-</body>
-</html>
+@stop

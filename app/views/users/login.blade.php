@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-</head>
-<body>
+@section('content')
 @if(Session::has('message') && Session::has('error'))
 	@if(Session::get('error'))
 	<p class="alert alert-danger" role="alert">{{ Session::get('message') }}</p>
@@ -20,5 +15,4 @@
 {{ Form::close() }}
 
 <a href="register">Create an Account</a>
-</body>
-</html>
+@stop

@@ -20,9 +20,17 @@ class HomeController extends BaseController {
 	public function showIndex()
 	{
 		$data['categories'] = Category::categories();
-		$data['authuser'] = Auth::user();
+		$data['user'] = Auth::user();
 
 		$this->layout->content = View::make('index',
+			$data);
+	}
+	public function showAdvisorIndex()
+	{
+		$data['categories'] = Category::categories();
+		$data['user'] = Auth::user();
+
+		$this->layout->content = View::make('advisor.index',
 			$data);
 	}
 }

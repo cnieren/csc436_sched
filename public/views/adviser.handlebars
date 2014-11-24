@@ -1,12 +1,18 @@
-<div class="panel panel-primary slideDown" style="visibility: hidden;">
-	<div class="panel-heading"><h3><strong>2. Select an advisor</strong></h3></div>
-	<div class="panel-body">
-		<p>Choose an advisor from the list below</p>
-        <select id="adviser" class="form-control">
-        	<option value="-1" selected>-- Select One --</option>
-        	{{#each this}}
-            <option value="{{id}}">{{fname}} {{lname}}</option>
-            {{/each}}
-        </select>
-	</div>
+<div class="panel panel-default slideDown" >
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            2. Select an advisor
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="inner-well-padding">
+            <p>Choose an advisor from the list below</p>
+            <select id="adviser" class="form-control">
+                <option value="-1" selected>-- Select One --</option>
+                {{#each this}}
+                <option value="{{id}}">{{fname}} {{lname}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
 </div>

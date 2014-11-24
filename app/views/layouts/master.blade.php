@@ -7,6 +7,7 @@
 	<title>Slate</title>
 
 	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
+	{{ HTML::style('css/bootstrap-theme.css') }}
 	{{ HTML::style('css/cal.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	{{ HTML::style('css/styles.css') }}
@@ -34,6 +35,10 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $user->fname }}  {{ $user->lname }}<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
+						<li><a href="/appointments">My Appointments</a></li>
+						@if ($user->isAdvisor())
+								<li><a href="/schedule">My Schedule</a></li>
+						@endif
 							<li><a href="/logout">Logout</a></li>
 						</ul>
 					</li>

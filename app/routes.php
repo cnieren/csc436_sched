@@ -22,6 +22,7 @@ Route::group(array('before' => 'auth'), function()
 {
 
 	Route::get('/', 'HomeController@showIndex');
+	Route::get('/advisor', 'HomeController@showAdvisorIndex');
 
 	// Main API
 	Route::group(array('prefix' => 'api/v1'), function()

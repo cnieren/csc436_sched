@@ -7,11 +7,23 @@
 	@endif
 @endif
 
+
 {{ Form::open(array('url'=>'login', 'class'=>'form-signin')) }}
-    <h1 class="form-signin-heading">Login</h1>
-    {{ Form::email('email', null, array('class'=>'form-control', 'placeholder'=>'Email Address')) }}<br>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			Please Login
+		</h4>
+	</div>
+	<div class="panel-body">
+		<div class="inner-well-padding">
+	{{ Form::email('email', null, array('class'=>'form-control', 'placeholder'=>'Email Address')) }}<br>
     {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')) }}<br>
-    {{ Form::submit('Login', array('class'=>'btn btn-large btn-primary btn-block'))}}
+		</div>
+		<hr>
+		<span class="pull-right" >{{ Form::submit('Login', array('class'=>'btn btn-large btn-primary btn-block'))}}</span>
+	</div>
+</div>
 {{ Form::close() }}
 
 <a href="register">Create an Account</a>

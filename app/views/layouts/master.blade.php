@@ -24,7 +24,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><i class="fa fa-calendar"></i></a>
+				@if (isset($user))
+				<a class="navbar-brand" href="/"><i class="fa fa-calendar"></i> Schedule an Appointment</a>
+				@else
+					<a class="navbar-brand" href="#"><i class="fa fa-calendar"></i></a>
+				@endif
 			</div>
 			@if (isset($user))
 			<!-- Collect the nav links, forms, and other content for toggling -->

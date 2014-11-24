@@ -25,12 +25,20 @@ class HomeController extends BaseController {
 		$this->layout->content = View::make('index',
 			$data);
 	}
-	public function showAdvisorIndex()
+	public function showAppointments()
+	{
+		$user = Auth::user();
+		$data['appointments'] = $user->appointments();
+
+		$this->layout->content = View::make('advisor.appointments',
+			$data);
+	}
+	public function showSchedule()
 	{
 		$data['categories'] = Category::categories();
 		$data['user'] = Auth::user();
 
-		$this->layout->content = View::make('advisor.index',
+		$this->layout->content = View::make('advisor.schedule',
 			$data);
 	}
 }

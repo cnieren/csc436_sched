@@ -65,15 +65,27 @@ class AdvisorAvailableAPIController extends BaseController {
 	}
 
 	/**
-	 * Store a newly created appointment in storage.
+	 * Store a newly created availability in storage.
 	 *
 	 * @return Response
 	 *
 	 */
 
-	public function store()
+	public function store($advisor_id)
 	{
+		$newAvailable = new Available;
+		$newAvailable->user_id = $advisor_id;
 
+		$dt_start = Carbon::now();
+		$dt_end = Carbon::now();
+
+		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
+		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+
+		$newAvailable->start_time = $dt_start;
+		$newAvailable->start_time = $dt_end;
+
+		$newAvailable->save();
 	}
 
 	/**

@@ -107,7 +107,7 @@
       },
 
       advisers: function(data) {
-        if(data === undefined) 
+        if(data === undefined)
           return my.advisers;
         my.advisers = data;
       },
@@ -129,7 +129,7 @@
 
         var el = my.section;
         el.remove();
-        calendarManager.remove();        
+        calendarManager.remove();
       }
     };
 
@@ -158,29 +158,35 @@
       },
       remove: function() {
         if(my.section === null) return;
-        
+
         var el = my.section;
-        el.remove();        
+        el.remove();
       },
       updateAvailables: function(data) {
         this.showSection(data);
       },
-      setupClndr: function() {        
-        $(my.calendar).clndr({
-          clickEvents: {
-            click: function(target) {
-                console.log(target.date._i);
+      setupClndr: function() {
+        $('#calendar').fullCalendar({
+      editable: true,
+         weekends: false,
+         defaultView:'agendaWeek',
+         selectable: true,
+      selectHelper: true,
+      select: function(start, end) {
+        var title = "Appointment with Timmy Garrabrant";
+        var eventData;
+        if (title) {
+          eventData = {
+            title: title,
+            start: start,
+            end: end
+          };
+          $('#calendar').fullCalendar('renderEvent', eventData, true);
+        }
+        $('#calendar').fullCalendar('unselect');
+      },
 
-                calendarManager.remove();
-                calendarManager.updateAvailables(null);
-                calendarManager.bindActions();
-              
-            },
-            onMonthChange: function(month) {
-              console.log('you just went to ' + month.format('MMMM, YYYY'));
-            }
-          }
-        });
+    })
       }
     };
 

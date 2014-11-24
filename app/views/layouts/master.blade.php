@@ -9,6 +9,7 @@
 	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
 	{{ HTML::style('css/bootstrap-theme.css') }}
 	{{ HTML::style('css/cal.css') }}
+	{{ HTML::style('assets/fullcalendar/dist/fullcalendar.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	{{ HTML::style('css/styles.css') }}
 </head>
@@ -61,9 +62,11 @@
 	{{ HTML::script('assets/handlebars/handlebars.min.js') }}
 	{{ HTML::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
 	{{ HTML::script('assets/moment/min/moment.min.js') }}
+	{{ HTML::script('assets/fullcalendar/dist/fullcalendar.min.js') }}
 	{{ HTML::script('assets/clndr/clndr.min.js') }}
 
 	{{ HTML::script('js/handlebarsHelpers.js') }}
 	{{ HTML::script('js/main.js') }}
+	@yield('js')
 </body>
 </html>

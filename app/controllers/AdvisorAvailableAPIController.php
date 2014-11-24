@@ -11,8 +11,10 @@ class AdvisorAvailableAPIController extends BaseController {
 	 *
 	 */
 
-	public function index()
+	public function index($advisor_id)
 	{
+		$availables = User::find($advisor_id)->availables;
+		return Response::json($availables);
 	}
 
 	/**
@@ -27,7 +29,7 @@ class AdvisorAvailableAPIController extends BaseController {
 	 */
 
 	public function show($advisor_id, $filter_date)
-	{	
+	{
 		$availables = null;
 		$advisor = User::find($advisor_id);
 
@@ -36,8 +38,8 @@ class AdvisorAvailableAPIController extends BaseController {
 			return '[{"error": "Advisor does not exist"]}';
 		}
 
-		if ($filter_date == "*") {	
-			// Return all availables for the passed in advisor id		
+		if ($filter_date == "*") {
+			// Return all availables for the passed in advisor id
 			$availables = $advisor->availables;
 		} else {
 			// Return only availables that fall on the passed in
@@ -53,9 +55,9 @@ class AdvisorAvailableAPIController extends BaseController {
 
 			$min = $filter_date." 00:00:00";
 			$max = $filter_date." 23:59:59";
-			
+
 			$availables = Available::where('user_id', '=', $advisor_id)
-				->whereBetween('start_time', array($min, $max))				
+				->whereBetween('start_time', array($min, $max))
 				->get();
 		}
 

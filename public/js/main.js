@@ -35,6 +35,7 @@
       section: el,
       selector: el.querySelectorAll('select')[0],
       categoryId: null,
+      categoryName: null,
 
       getAdvisers: function() {
         var url = 'api/v1/categories/' + my.categoryId + '/advisors/*';
@@ -48,6 +49,7 @@
 
       selectorChanged: function() {
         my.categoryId = this.options[this.selectedIndex].value;
+        my.categoryName = this.options[this.selectedIndex].text;
         my.getAdvisers();
       }
     },
@@ -81,6 +83,7 @@
       template: 'adviser',
       advisers: [],
       advisorId: null,
+      advisorName: null,
     },
     that = {
       bindActions: function() {
@@ -90,7 +93,7 @@
       showSection: function(data) {
         var prevSection = categoryManager.section(),
         tmpl = Handlebars.getTemplate(my.template);
-
+        
         prevSection.insertAdjacentHTML('afterend', tmpl(JSON.parse(data)));
         my.section = document.getElementsByClassName('panel')[1];
         my.selector = my.section.querySelectorAll('select')[0];
@@ -98,11 +101,12 @@
 
       adviserChosen: function() {
         my.advisorId = this.options[this.selectedIndex].value;
+        my.advisorName = this.options[this.selectedIndex].text;
         var url = 'api/v1/advisors/' + my.advisorId + '/available/*';
         get(url).then(function(data) {
           calendarManager.remove();
           calendarManager.updateAvailables(data);
-          calendarManager.bindActions();
+          calendarManager.bindActions();          
         });
       },
 
@@ -122,6 +126,14 @@
 
       template: function() {
         return my.template;
+      },
+
+      selectedName: function() {
+        return my.advisorName;
+      },
+
+      selectedId: function() {
+        return my.advisorId;
       },
 
       remove: function() {
@@ -167,26 +179,26 @@
       },
       setupClndr: function() {
         $('#calendar').fullCalendar({
-      editable: true,
-         weekends: false,
-         defaultView:'agendaWeek',
-         selectable: true,
-      selectHelper: true,
-      select: function(start, end) {
-        var title = "Appointment with Timmy Garrabrant";
-        var eventData;
-        if (title) {
-          eventData = {
-            title: title,
-            start: start,
-            end: end
-          };
-          $('#calendar').fullCalendar('renderEvent', eventData, true);
-        }
-        $('#calendar').fullCalendar('unselect');
-      },
+          editable: true,
+          weekends: false,
+          defaultView:'agendaWeek',
+          selectable: true,
+          selectHelper: true,
+          select: function(start, end) {
+            var title = "Appointment with " + adviserManager.selectedName();
+            var eventData;
+            if (title) {
+              eventData = {
+                title: title,
+                start: start,
+                end: end
+              };
+              $('#calendar').fullCalendar('renderEvent', eventData, true);
+            }
+            $('#calendar').fullCalendar('unselect');
+          },
 
-    })
+        })
       }
     };
 
@@ -196,22 +208,10 @@
 
   gatherTemplates();
 
-  var categoryManager = category(document.getElementsByClassName('panel')[0]),
-    adviserManager = adviser();
-    calendarManager = calendar();
+  var categoryManager = category(document.getElementsByClassName('panel')[0]);
+  var adviserManager = adviser();  
+  var calendarManager = calendar();
 
-    categoryManager.bindActions();
+  categoryManager.bindActions();
 
 }(jQuery));
-
-$(document).ready( function() {
-
-  // assuming you've got the appropriate language files,
-  // clndr will respect whatever moment's language is set to.
-  // moment.locale('ru');
-
-
-  $('.list-group-item').click(function() {
-    $(this).toggleClass( "list-group-item-info" );
-  });
-});

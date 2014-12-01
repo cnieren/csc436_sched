@@ -192,8 +192,7 @@
             })        
           },
 
-          select: function(start, end) {
-            console.log("something selected");
+          select: function(start, end) {            
             var title = "Appointment with " + adviserManager.selectedName();
             var eventData;
             if (title) {

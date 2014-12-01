@@ -184,7 +184,16 @@
           defaultView:'agendaWeek',
           selectable: true,
           selectHelper: true,
+
+          eventRender: function(event, element) {
+            // Remove the event if it is double clicked
+            element.bind('dblclick', function() {              
+              $('#calendar').fullCalendar('removeEvents', event._id);
+            })        
+          },
+
           select: function(start, end) {
+            console.log("something selected");
             var title = "Appointment with " + adviserManager.selectedName();
             var eventData;
             if (title) {
@@ -196,7 +205,7 @@
               $('#calendar').fullCalendar('renderEvent', eventData, true);
             }
             $('#calendar').fullCalendar('unselect');
-          },
+          },         
 
         })
       }

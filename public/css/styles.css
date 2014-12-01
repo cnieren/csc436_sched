@@ -28,3 +28,7 @@
 	95%{ -webkit-transform: translateY(-2%); }
 	100% { -webkit-transform: translateY(0%); }
 }
+
+.fc-time-grid-container {
+	height: 100% !important;
+}

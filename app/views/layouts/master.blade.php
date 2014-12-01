@@ -8,7 +8,6 @@
 
 	{{ HTML::style('assets/bootstrap/dist/css/bootstrap.css') }}
 	{{ HTML::style('css/bootstrap-theme.css') }}
-	{{ HTML::style('css/cal.css') }}
 	{{ HTML::style('assets/fullcalendar/dist/fullcalendar.css') }}
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	{{ HTML::style('css/styles.css') }}

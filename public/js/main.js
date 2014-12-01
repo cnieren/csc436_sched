@@ -179,11 +179,14 @@
       },
       setupClndr: function() {
         $('#calendar').fullCalendar({
-          editable: true,
-          weekends: false,
+          allDaySlot: false,
           defaultView:'agendaWeek',
+          editable: true,
+          minTime: "08:00:00",
+          maxTime: "18:00:00",              
           selectable: true,
           selectHelper: true,
+          weekends: false,
 
           eventRender: function(event, element) {
             // Remove the event if it is double clicked

@@ -208,9 +208,9 @@
 
   gatherTemplates();
 
-  var categoryManager = category(document.getElementsByClassName('panel')[0]);
-  var adviserManager = adviser();  
-  var calendarManager = calendar();
+  var categoryManager = category(document.getElementsByClassName('panel')[0]),
+      adviserManager = adviser(),  
+      calendarManager = calendar();
 
   categoryManager.bindActions();
 

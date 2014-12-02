@@ -173,7 +173,8 @@
     var my = {
       section: null,
       calendar: null,
-      template: 'scheduler'
+      template: 'scheduler',
+      selectedEvents: [],
     },
     that = {
       bindActions: function() {
@@ -214,6 +215,9 @@
       updateAvailables: function() {
         this.showSection();
       },
+      selectedEVents: function(){
+        return my.selectedEvents;
+      },
       setupClndr: function() {
         $('#calendar').fullCalendar({
           allDaySlot: false,
@@ -227,7 +231,7 @@
           slotEventOverlap: false,
           weekends: false,
 
-          eventRender: function(event, element) {
+          eventRender: function(event, element) {            
             // Remove the event if it is double clicked.
             // Only remove events that are new or editable ... had to do these checks
             // so as to no have JS throw undefined errors. 
@@ -236,11 +240,18 @@
               event.source.editable) {
                 element.bind('dblclick', function() {              
                   $('#calendar').fullCalendar('removeEvents', event._id);
+
+                  // We've removed an event..lets check to see if any user
+                  // created events still exist; otherwise remove the save
+                  // button.
+                  if (getUserCreatedEvents().length < 1) {
+                    $('#confirm-button').hide();
+                  }                  
                 });
             }
           },
 
-          select: function(start, end) {            
+          select: function(start, end) {                    
             var title = "Appointment with " + adviserManager.selectedName();
             var eventData;
             if (title) {
@@ -252,6 +263,13 @@
               $('#calendar').fullCalendar('renderEvent', eventData, true);
             }
             $('#calendar').fullCalendar('unselect');
+
+            // After the event is rendered and unselected let's 
+            // check if any user created events still exist and display
+            // save button if so                  
+            if (getUserCreatedEvents().length > 0) {
+              $('#confirm-button').show();
+            }
           },         
 
         });
@@ -271,3 +289,14 @@
   categoryManager.bindActions();
 
 }(jQuery));
+
+function getUserCreatedEvents() {
+  var allEvents = $('#calendar').fullCalendar('clientEvents');
+
+  // Filter out the events that the user created
+  var createdEvents = jQuery.grep(allEvents, function(e) {
+    return (e._id.indexOf('_fc') > -1);
+  });
+
+  return createdEvents;
+}

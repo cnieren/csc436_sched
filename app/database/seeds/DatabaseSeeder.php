@@ -65,7 +65,7 @@ class UserTableSeeder extends Seeder {
 									'lname' => 'Pawlowski',
 									'email' => 'homeski@email.arizona.edu',
 									'phone' => '520555555',
-									'password' => '614h',
+									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
 
@@ -73,7 +73,7 @@ class UserTableSeeder extends Seeder {
 									'lname' => 'Garrabrant',
 									'email' => 'timmy@email.arizona.edu',
 									'phone' => '520555556',
-									'password' => '614h',
+									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
 
@@ -81,7 +81,7 @@ class UserTableSeeder extends Seeder {
 									'lname' => 'Nierenhausen',
 									'email' => 'chad@email.arizona.edu',
 									'phone' => '520555557',
-									'password' => '614h',
+									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
 	}
@@ -165,7 +165,7 @@ class UnavailableSeeder extends Seeder {
 		// Timmy
 		Unavailable::create(array('user_id' => '2',
 											'start' => $dt_start,
-											'end' => $dt_end));		
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
@@ -197,7 +197,7 @@ class UnavailableSeeder extends Seeder {
 		// Chad
 		Unavailable::create(array('user_id' => '3',
 											'start' => $dt_start,
-											'end' => $dt_end));		
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(12)->day(9)->hour(8)->minute(0)->second(0);
 		$dt_end->year(2014)->month(12)->day(9)->hour(15)->minute(15)->second(0);
@@ -205,7 +205,7 @@ class UnavailableSeeder extends Seeder {
 		// Chad
 		Unavailable::create(array('user_id' => '3',
 											'start' => $dt_start,
-											'end' => $dt_end));				
+											'end' => $dt_end));
 	}
 }
 

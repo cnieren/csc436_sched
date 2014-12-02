@@ -53,3 +53,14 @@
 .fc-time-grid-container {
 	height: 100% !important;
 }
+
+#calendar-panel .panel-heading {
+	position: relative;
+}
+
+#confirm-button {
+	display: none;
+	position: absolute;
+	right: 18px;
+	top: 18px;
+}

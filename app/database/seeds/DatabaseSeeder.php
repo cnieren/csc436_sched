@@ -159,6 +159,14 @@ class UnavailableSeeder extends Seeder {
 											'start' => $dt_start,
 											'end' => $dt_end));
 
+		$dt_start->year(2014)->month(12)->day(1)->hour(8)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(1)->hour(9)->minute(30)->second(0);
+
+		// Timmy
+		Unavailable::create(array('user_id' => '2',
+											'start' => $dt_start,
+											'end' => $dt_end));		
+
 		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
 
@@ -182,6 +190,22 @@ class UnavailableSeeder extends Seeder {
 		Unavailable::create(array('user_id' => '3',
 											'start' => $dt_start,
 											'end' => $dt_end));
+
+		$dt_start->year(2014)->month(12)->day(5)->hour(9)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(5)->hour(14)->minute(0)->second(0);
+
+		// Chad
+		Unavailable::create(array('user_id' => '3',
+											'start' => $dt_start,
+											'end' => $dt_end));		
+
+		$dt_start->year(2014)->month(12)->day(9)->hour(8)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(9)->hour(15)->minute(15)->second(0);
+
+		// Chad
+		Unavailable::create(array('user_id' => '3',
+											'start' => $dt_start,
+											'end' => $dt_end));				
 	}
 }
 

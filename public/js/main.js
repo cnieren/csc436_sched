@@ -175,6 +175,7 @@
       calendar: null,
       template: 'scheduler',
       selectedEvents: [],
+      saveButton: null,
     },
     that = {
       bindActions: function() {
@@ -196,6 +197,8 @@
             textColor: 'black',
             editable: false
         });
+
+        my.saveButton.addEventListener('click', that.saveEvents);
       },
       showSection: function() {
         var prevSection = adviserManager.section(),
@@ -204,6 +207,7 @@
         prevSection.insertAdjacentHTML('afterend', tmpl());
         my.section = document.getElementsByClassName('panel')[2];
         my.calendar = document.getElementById('cal');
+        my.saveButton = document.getElementById('confirm-button');
         Handlebars.scrollToDiv('calendar-panel');        
       },
       remove: function() {
@@ -218,6 +222,15 @@
       selectedEVents: function(){
         return my.selectedEvents;
       },
+      section: function() {
+        return my.section;
+      },
+      saveEvents: function() {
+        console.log("events should be saved now!");
+
+        confirmationManager.remove();
+        confirmationManager.showSection();
+      },     
       setupClndr: function() {
         $('#calendar').fullCalendar({
           allDaySlot: false,
@@ -279,12 +292,45 @@
     return that;
   };
 
+  var confirmation = function() {
+    var my = {
+      section: null,
+      template: 'confirmation',
+      appointments: null
+    },
+    that = {
+      showSection: function() {
+        var prevSection = calendarManager.section(),
+        tmpl = Handlebars.getTemplate(my.template);
+        
+        prevSection.insertAdjacentHTML('afterend', tmpl());
+        my.section = document.getElementsByClassName('panel')[3];        
+        Handlebars.scrollToDiv('confirmation-panel');
+      },
+      section: function() {
+        return my.section;
+      },
+      template: function() {
+        return my.template;
+      },
+      remove: function() {
+        if (my.section === null) return;
+
+        var el = my.section;
+        el.remove();
+      }
+    };
+
+    return that;
+  };
+
 
   gatherTemplates();
 
   var categoryManager = category(document.getElementsByClassName('panel')[0]),
       adviserManager = adviser(),  
-      calendarManager = calendar();
+      calendarManager = calendar(),
+      confirmationManager = confirmation();
 
   categoryManager.bindActions();
 

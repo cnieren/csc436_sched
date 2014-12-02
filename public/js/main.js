@@ -28,7 +28,7 @@
 
       req.send();
     });
-  }
+  };
 
   var category = function(el) {
     var my = {
@@ -69,12 +69,12 @@
 
       remove: function() {
         var el = my.section;
-        el.parentNode.removeChild(el)
+        el.parentNode.removeChild(el);
       }
     };
 
     return that;
-  }
+  };
 
   var adviser = function() {
     var my = {
@@ -146,7 +146,7 @@
     };
 
     return that;
-  }
+  };
 
   var calendar = function() {
     var my = {
@@ -192,7 +192,7 @@
             // Remove the event if it is double clicked
             element.bind('dblclick', function() {              
               $('#calendar').fullCalendar('removeEvents', event._id);
-            })        
+            });
           },
 
           select: function(start, end) {            
@@ -209,12 +209,12 @@
             $('#calendar').fullCalendar('unselect');
           },         
 
-        })
+        });
       }
     };
 
     return that;
-  }
+  };
 
 
   gatherTemplates();

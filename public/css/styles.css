@@ -1,11 +1,14 @@
 .slideDown{
 	animation-name: slideDown;
+	-moz-animation-name: slideDown;
 	-webkit-animation-name: slideDown;	
 
 	animation-duration: 1.5s;	
+	-moz-animation-duration: 1.5s;
 	-webkit-animation-duration: 1.5s;
 
 	animation-timing-function: ease;	
+	-moz-animation-timing-function: ease;
 	-webkit-animation-timing-function: ease;	
 
 	visibility: visible !important;						
@@ -21,12 +24,30 @@
 }
 
 @-webkit-keyframes slideDown {
-	0% { -webkit-transform: translateY(-100%); }
-	50%{ -webkit-transform: translateY(8%); }
-	65%{ -webkit-transform: translateY(-4%); }
-	80%{ -webkit-transform: translateY(4%); }
-	95%{ -webkit-transform: translateY(-2%); }
-	100% { -webkit-transform: translateY(0%); }
+	0% { 
+		-webkit-transform: translateY(-100%); 
+		transform: translateY(-100%);
+	}
+	50% { 
+		-webkit-transform: translateY(8%); 
+		transform: translateY(8%);
+	}
+	65% { 
+		-webkit-transform: translateY(-4%); 
+		transform: translateY(-4%);
+	}
+	80% { 
+		-webkit-transform: translateY(4%); 
+		transform: translateY(4%);
+	}
+	95% { 
+		-webkit-transform: translateY(-2%);
+		transform: translateY(-2%);
+	}
+	100% { 
+		-webkit-transform: translateY(0%); 
+		transform: translateY(0%);
+	}
 }
 
 .fc-time-grid-container {

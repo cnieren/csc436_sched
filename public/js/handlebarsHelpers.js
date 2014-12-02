@@ -18,9 +18,9 @@ Handlebars.getTemplate = function(name) {
 			var data = this.response;
 			Handlebars.templates[name] = Handlebars.compile(data);
 		} 
-	}
+	};
 
 	request.send();
 
 	return Handlebars.templates[name];
-}
+};

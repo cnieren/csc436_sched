@@ -176,6 +176,7 @@
       },
       updateAvailables: function(data) {
         this.showSection(data);
+        console.log("updated");
       },
       setupClndr: function() {
         $('#calendar').fullCalendar({
@@ -189,6 +190,14 @@
           selectHelper: true,
           slotEventOverlap: false,
           weekends: false,
+
+          eventSources: [{
+            events: [
+              { title:"test", start:"2014-12-03 12:00:00", end:"2014-12-03 13:00:00" }
+            ],
+            color: 'black',
+            textColor: 'white'
+          }],
 
           eventRender: function(event, element) {
             // Remove the event if it is double clicked

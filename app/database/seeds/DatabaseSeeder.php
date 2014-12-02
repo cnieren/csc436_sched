@@ -215,19 +215,19 @@ class AppointmentsSeeder extends Seeder {
 		$dt_start = Carbon::now();
 		$dt_end = Carbon::now();
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(9)->minute(15)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+		$dt_start->year(2014)->month(12)->day(4)->hour(9)->minute(15)->second(0);
+		$dt_end->year(2014)->month(12)->day(4)->hour(9)->minute(30)->second(0);
 
 		Appointment::create(array('category_id' => '1',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(13)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(14)->minute(0)->second(0);
+		$dt_start->year(2014)->month(12)->day(2)->hour(13)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(2)->hour(14)->minute(0)->second(0);
 
 		Appointment::create(array('category_id' => '3',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 	}
 }
 

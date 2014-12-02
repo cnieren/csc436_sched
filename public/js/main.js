@@ -85,6 +85,7 @@
       advisorId: null,
       advisorName: null,
       unavailables: null,
+      appointments: null,
     },
     that = {
       bindActions: function() {
@@ -103,13 +104,22 @@
       adviserChosen: function() {
         my.advisorId = this.options[this.selectedIndex].value;
         my.advisorName = this.options[this.selectedIndex].text;
+
+        // Get and set unavailables
         var url = 'api/v1/advisors/' + my.advisorId + '/unavailable/*';
         get(url).then(function(data) {
-          my.unavailables = data;          
-          calendarManager.remove();
-          calendarManager.updateAvailables(data);
-          calendarManager.bindActions();          
+          my.unavailables = data;                   
         });
+
+        // Get and set appointments
+        var url = 'api/v1/advisors/' + my.advisorId + '/appointments';
+        get(url).then(function(data) {
+          my.appointments = data;         
+
+          calendarManager.remove();
+          calendarManager.updateAvailables();
+          calendarManager.bindActions(); 
+        });        
       },
 
       advisers: function(data) {
@@ -142,6 +152,10 @@
         return my.unavailables;
       },
 
+      appointments: function() {
+        return my.appointments;
+      },
+
       remove: function() {
         if (my.section === null) return;
 
@@ -165,15 +179,24 @@
       bindActions: function() {
         this.setupClndr();                
         
-        var jsonEvents = jQuery.parseJSON(adviserManager.unavailables());
+        var jsonUnavailables = jQuery.parseJSON(adviserManager.unavailables());
+        var jsonAppointments = jQuery.parseJSON(adviserManager.appointments());
 
         $('#calendar').fullCalendar('addEventSource', {
-            events: jsonEvents,
+            events: jsonUnavailables,
             color: 'black',
-            textColor: 'white'
-          });
+            textColor: 'white',
+            editable: false
+        });
+
+        $('#calendar').fullCalendar('addEventSource', {
+            events: jsonAppointments,
+            color: 'yellow',
+            textColor: 'black',
+            editable: false
+        });
       },
-      showSection: function(data) {
+      showSection: function() {
         var prevSection = adviserManager.section(),
         tmpl = Handlebars.getTemplate(my.template);
 
@@ -188,8 +211,8 @@
         var el = my.section;
         el.remove();
       },
-      updateAvailables: function(data) {
-        this.showSection(data);
+      updateAvailables: function() {
+        this.showSection();
       },
       setupClndr: function() {
         $('#calendar').fullCalendar({

@@ -21,7 +21,6 @@ class CreateUnavailableTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('title');
 			$table->dateTime('start');
-			$table->boolean('editable');
 			$table->dateTime('end');
 		});
 	}

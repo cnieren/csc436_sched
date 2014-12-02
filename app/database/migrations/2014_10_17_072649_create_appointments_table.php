@@ -19,8 +19,9 @@ class CreateAppointmentsTable extends Migration {
 			$table->increments('id');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('id')->on('categories');
-			$table->dateTime('start_time');
-			$table->dateTime('end_time');
+			$table->string('title');
+			$table->dateTime('start');
+			$table->dateTime('end');
 			$table->timestamps();
 		});
 	}

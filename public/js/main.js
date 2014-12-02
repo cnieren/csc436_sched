@@ -84,6 +84,7 @@
       advisers: [],
       advisorId: null,
       advisorName: null,
+      unavailables: null,
     },
     that = {
       bindActions: function() {
@@ -104,6 +105,7 @@
         my.advisorName = this.options[this.selectedIndex].text;
         var url = 'api/v1/advisors/' + my.advisorId + '/unavailable/*';
         get(url).then(function(data) {
+          my.unavailables = data;          
           calendarManager.remove();
           calendarManager.updateAvailables(data);
           calendarManager.bindActions();          
@@ -136,6 +138,10 @@
         return my.advisorId;
       },
 
+      unavailables: function() {
+        return my.unavailables;
+      },
+
       remove: function() {
         if (my.section === null) return;
 
@@ -157,16 +163,24 @@
     },
     that = {
       bindActions: function() {
-        this.setupClndr();
+        this.setupClndr();                
+        
+        var jsonEvents = jQuery.parseJSON(adviserManager.unavailables());
+
+        $('#calendar').fullCalendar('addEventSource', {
+            events: jsonEvents,
+            color: 'black',
+            textColor: 'white'
+          });
       },
       showSection: function(data) {
         var prevSection = adviserManager.section(),
         tmpl = Handlebars.getTemplate(my.template);
 
-        prevSection.insertAdjacentHTML('afterend', tmpl(JSON.parse(data)));
+        prevSection.insertAdjacentHTML('afterend', tmpl());
         my.section = document.getElementsByClassName('panel')[2];
         my.calendar = document.getElementById('cal');
-        my.times = my.section.querySelectorAll('select')[0];
+        my.times = my.section.querySelectorAll('select')[0];        
       },
       remove: function() {
         if(my.section === null) return;
@@ -176,7 +190,6 @@
       },
       updateAvailables: function(data) {
         this.showSection(data);
-        console.log("updated");
       },
       setupClndr: function() {
         $('#calendar').fullCalendar({
@@ -190,14 +203,6 @@
           selectHelper: true,
           slotEventOverlap: false,
           weekends: false,
-
-          eventSources: [{
-            events: [
-              { title:"test", start:"2014-12-03 12:00:00", end:"2014-12-03 13:00:00" }
-            ],
-            color: 'black',
-            textColor: 'white'
-          }],
 
           eventRender: function(event, element) {
             // Remove the event if it is double clicked

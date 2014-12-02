@@ -24,3 +24,9 @@ Handlebars.getTemplate = function(name) {
 
 	return Handlebars.templates[name];
 };
+
+Handlebars.scrollToDiv = function(id) {
+	$('html,body').animate({
+	   scrollTop: $("#" + id).offset().top
+	});	
+}

@@ -99,6 +99,7 @@
         prevSection.insertAdjacentHTML('afterend', tmpl(JSON.parse(data)));
         my.section = document.getElementsByClassName('panel')[1];
         my.selector = my.section.querySelectorAll('select')[0];
+        Handlebars.scrollToDiv('advisors-panel');
       },
 
       adviserChosen: function() {
@@ -172,7 +173,6 @@
     var my = {
       section: null,
       calendar: null,
-      times: null,
       template: 'scheduler'
     },
     that = {
@@ -203,7 +203,7 @@
         prevSection.insertAdjacentHTML('afterend', tmpl());
         my.section = document.getElementsByClassName('panel')[2];
         my.calendar = document.getElementById('cal');
-        my.times = my.section.querySelectorAll('select')[0];        
+        Handlebars.scrollToDiv('calendar-panel');        
       },
       remove: function() {
         if(my.section === null) return;

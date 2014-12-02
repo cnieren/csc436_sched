@@ -57,7 +57,7 @@ class AdvisorUnavailableAPIController extends BaseController {
 			$max = $filter_date." 23:59:59";
 
 			$unavailables = Unavailable::where('user_id', '=', $advisor_id)
-				->whereBetween('start_time', array($min, $max))
+				->whereBetween('start', array($min, $max))
 				->get();
 		}
 

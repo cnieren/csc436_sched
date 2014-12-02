@@ -148,40 +148,40 @@ class UnavailableSeeder extends Seeder {
 
 		// Timmy
 		Unavailable::create(array('user_id' => '2',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(17)->minute(0)->second(0);
 
 		// Timmy
 		Unavailable::create(array('user_id' => '2',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
 
 		// Chad
 		Unavailable::create(array('user_id' => '3',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
 		$dt_end->year(2014)->month(11)->day(3)->hour(15)->minute(15)->second(0);
 
 		// Chad
 		Unavailable::create(array('user_id' => '3',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 
 		$dt_start->year(2014)->month(12)->day(3)->hour(12)->minute(0)->second(0);
 		$dt_end->year(2014)->month(12)->day(3)->hour(13)->minute(0)->second(0);
 
 		// Chad
 		Unavailable::create(array('user_id' => '3',
-											'start_time' => $dt_start,
-											'end_time' => $dt_end));
+											'start' => $dt_start,
+											'end' => $dt_end));
 	}
 }
 

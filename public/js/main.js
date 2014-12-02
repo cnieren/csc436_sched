@@ -58,15 +58,15 @@
       bindActions: function() {
         my.selector.addEventListener('change', my.selectorChanged);
       },
-
       section: function() {
         return my.section;
       },
-
       selector: function() {
         return my.selector;
       },
-
+      categoryId: function() {
+        return my.categoryId;
+      },
       remove: function() {
         var el = my.section;
         el.parentNode.removeChild(el);
@@ -128,35 +128,27 @@
           return my.advisers;
         my.advisers = data;
       },
-
       section: function() {
         return my.section;
       },
-
       selector: function() {
         return my.selector;
       },
-
       template: function() {
         return my.template;
       },
-
       selectedName: function() {
         return my.advisorName;
       },
-
       selectedId: function() {
         return my.advisorId;
       },
-
       unavailables: function() {
         return my.unavailables;
       },
-
       appointments: function() {
         return my.appointments;
       },
-
       remove: function() {
         if (my.section === null) return;
 
@@ -226,10 +218,34 @@
         return my.section;
       },
       saveEvents: function() {
-        console.log("events should be saved now!");
+        console.log("events/appointments should be saved now!");
 
-        confirmationManager.remove();
-        confirmationManager.showSection();
+        var appointments = [];
+        
+        // For each event we have, lets create a new object
+        // that has all the info we need , then create the appointment
+        // thru the API.
+        jQuery.each(getUserCreatedEvents(), function(i, o) {
+          var start = moment(o._start._d).format("YYYY-MM-DD HH:mm:ss");
+          var end = moment(o._end._d).format("YYYY-MM-DD HH:mm:ss");
+
+          var obj = { category:categoryManager.categoryId(),
+                      advisor:adviserManager.selectedId(),
+                      studentId:1, // Don't know how to get studentID yet ....
+                      start:start,
+                      end:end,
+                    };
+
+          // POST each appointment to our API controller
+          var ajaxPost = jQuery.post('api/v1/appointments/', obj);
+          
+          ajaxPost.done(function(data) {
+            console.log(data);
+          });        
+        });
+
+        //confirmationManager.remove();
+        //confirmationManager.showSection();
       },     
       setupClndr: function() {
         $('#calendar').fullCalendar({
@@ -242,6 +258,7 @@
           selectable: true,
           selectHelper: true,
           slotEventOverlap: false,
+          timezone: 'local',
           weekends: false,
 
           eventRender: function(event, element) {            
@@ -336,6 +353,8 @@
 
 }(jQuery));
 
+// Will return an array of all the user created
+// events from fullCalendar
 function getUserCreatedEvents() {
   var allEvents = $('#calendar').fullCalendar('clientEvents');
 

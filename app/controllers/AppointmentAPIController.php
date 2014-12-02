@@ -60,13 +60,13 @@ class AppointmentAPIController extends BaseController {
 				400
 			);
 		}		
-		elseif(!array_key_exists('startTime', $input)){
+		elseif(!array_key_exists('start', $input)){
 			return Response::json(array(
 				'message' => 'Missing startTime'),
 				400
 			);
 		}
-		elseif(!array_key_exists('endTime', $input)){
+		elseif(!array_key_exists('end', $input)){
 			return Response::json(array(
 				'message' => 'Missing endTime'),
 				400
@@ -86,8 +86,8 @@ class AppointmentAPIController extends BaseController {
 		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
 
 		$appointment->category_id = $input['category'];
-		$appointment->start_time = $dt_start;
-		$appointment->end_time = $dt_end;
+		$appointment->start = $dt_start;
+		$appointment->end = $dt_end;
 		$appointment->save();
 
 		$user = User::find($input['studentId']);

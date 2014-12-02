@@ -102,7 +102,7 @@
       adviserChosen: function() {
         my.advisorId = this.options[this.selectedIndex].value;
         my.advisorName = this.options[this.selectedIndex].text;
-        var url = 'api/v1/advisors/' + my.advisorId + '/available/*';
+        var url = 'api/v1/advisors/' + my.advisorId + '/unavailable/*';
         get(url).then(function(data) {
           calendarManager.remove();
           calendarManager.updateAvailables(data);

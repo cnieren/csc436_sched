@@ -182,10 +182,12 @@
           allDaySlot: false,
           defaultView:'agendaWeek',
           editable: true,
+          eventOverlap: false,
           minTime: "08:00:00",
           maxTime: "18:00:00",              
           selectable: true,
           selectHelper: true,
+          slotEventOverlap: false,
           weekends: false,
 
           eventRender: function(event, element) {

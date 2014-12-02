@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-class AdvisorAvailableAPIController extends BaseController {
+class AdvisorUnavailableAPIController extends BaseController {
 
 	/**
 	 * Display a listing of Appointments under the Currently Logged User.
@@ -13,13 +13,13 @@ class AdvisorAvailableAPIController extends BaseController {
 
 	public function index($advisor_id)
 	{
-		$availables = User::find($advisor_id)->availables;
-		return Response::json($availables);
+		$unavailables = User::find($advisor_id)->unavailables;
+		return Response::json($unavailables);
 	}
 
 	/**
-	 * Returns either all availables for the passed in advisor_id
-	 * OR will return only availables for the passed in advisor_id and filter_date
+	 * Returns either all unavailables for the passed in advisor_id
+	 * OR will return only unavailables for the passed in advisor_id and filter_date
 	 *
 	 * @param  int  $advisor_id, string filter_date
 	 * @return Response
@@ -30,7 +30,7 @@ class AdvisorAvailableAPIController extends BaseController {
 
 	public function show($advisor_id, $filter_date)
 	{
-		$availables = null;
+		$unavailables = null;
 		$advisor = User::find($advisor_id);
 
 		// Make sure advisor exists
@@ -40,7 +40,7 @@ class AdvisorAvailableAPIController extends BaseController {
 
 		if ($filter_date == "*") {
 			// Return all availables for the passed in advisor id
-			$availables = $advisor->availables;
+			$unavailables = $advisor->unavailables;
 		} else {
 			// Return only availables that fall on the passed in
 			// filter date
@@ -56,12 +56,12 @@ class AdvisorAvailableAPIController extends BaseController {
 			$min = $filter_date." 00:00:00";
 			$max = $filter_date." 23:59:59";
 
-			$availables = Available::where('user_id', '=', $advisor_id)
+			$unavailables = Available::where('user_id', '=', $advisor_id)
 				->whereBetween('start_time', array($min, $max))
 				->get();
 		}
 
-		return $availables;
+		return $unavailables;
 	}
 
 	/**
@@ -73,8 +73,8 @@ class AdvisorAvailableAPIController extends BaseController {
 
 	public function store($advisor_id)
 	{
-		$newAvailable = new Available;
-		$newAvailable->user_id = $advisor_id;
+		$newUnavailable = new Unavailable;
+		$newUnavailable->user_id = $advisor_id;
 
 		$dt_start = Carbon::now();
 		$dt_end = Carbon::now();
@@ -82,10 +82,10 @@ class AdvisorAvailableAPIController extends BaseController {
 		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
 		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
 
-		$newAvailable->start_time = $dt_start;
-		$newAvailable->start_time = $dt_end;
+		$newUnavailable->start_time = $dt_start;
+		$newUnavailable->start_time = $dt_end;
 
-		$newAvailable->save();
+		$newUnavailable->save();
 	}
 
 	/**

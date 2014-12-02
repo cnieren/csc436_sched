@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('RolesTableSeeder');
 		$this->call('UserRolesTableSeeder');
 		$this->call('AdvisorCategoriesSeeder');
-		$this->call('AvailableSeeder');
+		$this->call('UnavailableSeeder');
 		$this->call('AppointmentsSeeder');
 		$this->call('AppointmentUsersSeeder');
 	}
@@ -137,7 +137,7 @@ class AdvisorCategoriesSeeder extends Seeder {
 	}
 }
 
-class AvailableSeeder extends Seeder {
+class UnavailableSeeder extends Seeder {
 	public function run()
 	{
 		$dt_start = Carbon::now();
@@ -147,7 +147,7 @@ class AvailableSeeder extends Seeder {
 		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
 
 		// Timmy
-		Available::create(array('user_id' => '2',
+		Unavailable::create(array('user_id' => '2',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 
@@ -155,7 +155,7 @@ class AvailableSeeder extends Seeder {
 		$dt_end->year(2014)->month(11)->day(3)->hour(17)->minute(0)->second(0);
 
 		// Timmy
-		Available::create(array('user_id' => '2',
+		Unavailable::create(array('user_id' => '2',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 
@@ -163,7 +163,7 @@ class AvailableSeeder extends Seeder {
 		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
 
 		// Chad
-		Available::create(array('user_id' => '3',
+		Unavailable::create(array('user_id' => '3',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 
@@ -171,7 +171,7 @@ class AvailableSeeder extends Seeder {
 		$dt_end->year(2014)->month(11)->day(3)->hour(15)->minute(15)->second(0);
 
 		// Chad
-		Available::create(array('user_id' => '3',
+		Unavailable::create(array('user_id' => '3',
 											'start_time' => $dt_start,
 											'end_time' => $dt_end));
 

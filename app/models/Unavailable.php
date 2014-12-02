@@ -1,6 +1,6 @@
 <?php
 
-class Available extends Eloquent
+class Unavailable extends Eloquent
 {
 	public $timestamps = false;
 

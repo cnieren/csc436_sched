@@ -30,7 +30,7 @@ Route::group(array('before' => 'auth'), function()
 	{
 
 		Route::resource('advisors.appointments', 'AdvisorAppointmentAPIController');
-		Route::resource('advisors.available', 'AdvisorAvailableAPIController');
+		Route::resource('advisors.unavailable', 'AdvisorUnavailableAPIController');
 		Route::resource('advisors', 'AdvisorAPIController');
 		Route::resource('appointments', 'AppointmentAPIController');
 		Route::resource('categories.advisors', 'CategoryAdvisorAPIController');

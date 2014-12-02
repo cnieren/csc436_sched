@@ -59,7 +59,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function availables()
 	{
-		return $this->hasMany('Available');
+		return $this->hasMany('Unavailable');
 	}
 
 	public function appointments() {

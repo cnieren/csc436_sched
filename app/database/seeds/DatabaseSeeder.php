@@ -78,7 +78,7 @@ class UserTableSeeder extends Seeder {
 									));
 
 		User::create(array('fname' => 'Chad',
-									'lname' => 'Nierenhousen',
+									'lname' => 'Nierenhausen',
 									'email' => 'chad@email.arizona.edu',
 									'phone' => '520555557',
 									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',

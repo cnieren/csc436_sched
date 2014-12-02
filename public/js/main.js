@@ -228,10 +228,16 @@
           weekends: false,
 
           eventRender: function(event, element) {
-            // Remove the event if it is double clicked
-            element.bind('dblclick', function() {              
-              $('#calendar').fullCalendar('removeEvents', event._id);
-            });
+            // Remove the event if it is double clicked.
+            // Only remove events that are new or editable ... had to do these checks
+            // so as to no have JS throw undefined errors. 
+            if (typeof event.source === 'undefined' || 
+              typeof event.source.editable === 'undefined' || 
+              event.source.editable) {
+                element.bind('dblclick', function() {              
+                  $('#calendar').fullCalendar('removeEvents', event._id);
+                });
+            }
           },
 
           select: function(start, end) {            

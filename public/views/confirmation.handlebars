@@ -8,7 +8,15 @@
         <div class="inner-well-padding">
             <p>Your appointment(s) were created!</p>
             <p>Please review the details below</p>
-  
+            {{#each this}}
+                <ul>
+                    <li>Start time: {{start}}</li>
+                    <li>End time: {{end}}</li>
+                    <li>Reason: {{category}}</li>
+                    <li>Advisor: {{advisor}}</li>
+                    <li>Student: {{user}}</li>
+                </ul>
+            {{/each}}
         </div>
     </div>
 </div>

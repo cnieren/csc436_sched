@@ -20,10 +20,14 @@ class HomeController extends BaseController {
 	public function showIndex()
 	{
 		$data['categories'] = Category::categories();
-		$data['user'] = Auth::user();
+		$user = Auth::user();
+		$data['user'] = $user;
 
-		$this->layout->content = View::make('index',
-			$data);
+		if (!$user->isAdvisor()) {
+			$this->layout->content = View::make('index', $data);
+		} else {
+			$this->layout->content = View::make('advisorIndex');
+		}
 	}
 	public function showAppointments()
 	{

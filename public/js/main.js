@@ -177,9 +177,7 @@
         this.setupClndr();                
         
         var jsonUnavailables = jQuery.parseJSON(adviserManager.unavailables());
-        var jsonAppointments = jQuery.parseJSON(adviserManager.appointments());  
-
-        console.log(jsonAppointments);      
+        var jsonAppointments = jQuery.parseJSON(adviserManager.appointments());        
 
         $('#calendar').fullCalendar('addEventSource', {
             events: jsonUnavailables,

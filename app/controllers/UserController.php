@@ -45,7 +45,7 @@ class UserController extends BaseController {
 		$user = new User;
 		if(is_null($account_check)){
 			if (Input::get('password') != Input::get('password_rt')) {
-				return Redirect::to('users/register')->with('message', "Passwords don't match")->with('error', True);
+				return Redirect::to('register')->with('message', "Passwords don't match")->with('error', True);
 			}
 			$user->Fname = Input::get('first_name');
 			$user->Lname = Input::get('last_name');

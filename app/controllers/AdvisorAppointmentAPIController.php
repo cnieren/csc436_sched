@@ -12,8 +12,24 @@ class AdvisorAppointmentAPIController extends BaseController {
 	public function index($user_id)
 	{
 		$user = User::find($user_id);
+
+		$loggedInUserId = Auth::user()->id;
+
 		if ($user->isAdvisor()) {
-			return Response::json($user->appointments);
+			$appointments = $user->appointments;
+
+			foreach ($appointments as $key => $value) {
+				$allUsers = $value->users;
+
+				if ($allUsers[0]->id == $loggedInUserId || $allUsers[0]->id == $loggedInUserId) {
+					$value->color = 'green';
+					$value->title = $value->title . ' with you!';
+				} else {
+					$value->color = 'yellow';
+				}								
+			}
+
+			return Response::json($appointments);
 		}
 		return "[]";
 	}

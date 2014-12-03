@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class HomeController extends BaseController {
 
 	/*
@@ -37,8 +39,18 @@ class HomeController extends BaseController {
 
 		foreach ($data['appointments'] as $appointment) {
 			$appointment->title = Category::find($appointment->category_id)->name;
-			$appointment->advisor = "Timmy Garrabrant";
-			// return json_encode($appointment->users);// = $appointment->users->pivot->where('is_advising',1)->get();
+
+			$appointment->start = Carbon::parse($appointment->start)->toDayDateTimeString();
+			$appointment->end = Carbon::parse($appointment->end)->toDayDateTimeString();
+
+			// This is the hackish...and slow!..way to find out who is really the adviser
+			$allUsers = $appointment->users;
+			if ($allUsers[0]->id == $user->id) {
+				$appointment->advisor = $allUsers[1]->fname . ' ' . $allUsers[1]->lname;
+			} else {
+				$appointment->advisor = $allUsers[0]->fname . ' ' . $allUsers[0]->lname;
+			}		
+			
 		}
 
 		$this->layout->content = View::make('advisor.appointments',

@@ -187,8 +187,7 @@
         });
 
         $('#calendar').fullCalendar('addEventSource', {
-            events: jsonAppointments,
-            color: 'yellow',
+            events: jsonAppointments,            
             textColor: 'black',
             editable: false
         });

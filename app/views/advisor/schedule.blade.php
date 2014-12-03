@@ -31,7 +31,9 @@ $(document).ready(function() {
         $confirmButton = $('#confirm-button'),
         $calendar = $('#calendar');
 
-    var unavailReq = Slate.utils.getJSON('api/v1/advisors/3/unavailable')
+    var loggedInUserId = $('#logged-in-user-id').val();
+
+    var unavailReq = Slate.utils.getJSON('api/v1/advisors/' + loggedInUserId + '/unavailable')
     .then(function(data) {
         data.forEach(function(elem) {
             elem.type = 'unavailable';
@@ -39,7 +41,7 @@ $(document).ready(function() {
         addEventSource(data);
     });
 
-    var appointmentReq = Slate.utils.getJSON('api/v1/advisors/3/appointments')
+    var appointmentReq = Slate.utils.getJSON('api/v1/advisors/' + loggedInUserId + '/appointments')
     .then(function(data) {
         data.forEach(function(elem) {
             elem.type = 'appointment';
@@ -62,6 +64,18 @@ $(document).ready(function() {
         console.log('modified', modified);
         console.log('removed', removed);
 
+        removed.forEach(function(elem) {
+            var id = elem.id,
+                appointmentUrl = 'api/v1/appointments/',
+                unavailablesUrl = 'api/v1/unavailables/';
+            if(elem.type === 'appointment') {
+                Slate.utils.destroy(appointmentUrl + id);
+            } else if (elem.type === 'unavailable') {
+                Slate.utils.destroy(unavailablesUrl + id);
+            }
+            //Slate.utisl.destroy(id);
+        });
+
         var testAppointment = {
             id: 7,
             category: 1,
@@ -73,12 +87,12 @@ $(document).ready(function() {
 
         var url = 'api/v1/appointments/';
 
-        Slate.utils.put(url, testAppointment)
-        .then(function(data) {
-            console.log(data);
-        }, function(err) {
-            console.error(err);
-        });
+        // Slate.utils.put(url, testAppointment)
+        // .then(function(data) {
+        //     console.log(data);
+        // }, function(err) {
+        //     console.error(err);
+        // });
 
         // Slate.utils.post(url, testAppointment)
         // .then(function(data) {

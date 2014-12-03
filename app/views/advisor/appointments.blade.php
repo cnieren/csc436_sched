@@ -21,7 +21,7 @@
 						<td>{{$appointment->advisor}}</td>
 						<td>{{$appointment->start}}</td>
 						<td>{{$appointment->end}}</td>
-						<td><a onclick="alert({{$appointment->id}})" class="glyphicon glyphicon-remove"></a></td>
+						<td><a onclick="deleteAppt({{$appointment->id}})" class="glyphicon glyphicon-remove"></a></td>
 					</tr>
 					@endforeach
 					@if($appointments->count() == 0)
@@ -34,4 +34,15 @@
 		</div>
 	</div>
 </div>
+<script>
+function deleteAppt(id) {
+	$.ajax({
+	    url: 'api/v1/appointments/' + id,
+	    type: 'DELETE',
+	    success: function(result) {
+	        location.reload();
+	    }
+	});
+}
+</script>
 @stop

@@ -128,8 +128,17 @@ class AppointmentAPIController extends BaseController {
 	 */
 
 	public function destroy($appointment_id) {
-		$appointment = Appointment::find($appointment_id);
-		$appointment->delete();
+		//$loggedInUser = Auth::user();
+
+		//$loggedInUser->appointments->delete();
+
+		DB::table('appointment_users')->where('appointment_id', '=', $appointment_id)->delete();
+		DB::table('appointments')->where('id', '=', $appointment_id)->delete();
+
+		//$appointment = Appointment::find($appointment_id);
+		//$appointment->delete();
+
+		//return Response::json({"msg":"success!"});
 	}
 
 }

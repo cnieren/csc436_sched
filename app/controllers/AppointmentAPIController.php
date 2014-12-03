@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+
 
 use Carbon\Carbon;
 
@@ -44,7 +44,7 @@ class AppointmentAPIController extends BaseController {
 
 	public function store()
 	{
-		$appointment = new Appointment;		
+		$appointment = new Appointment;
 		$input = Input::all();
 
 		//Check Required
@@ -59,7 +59,7 @@ class AppointmentAPIController extends BaseController {
 				'message' => 'Missing advisor'),
 				400
 			);
-		}		
+		}
 		elseif(!array_key_exists('start', $input)){
 			return Response::json(array(
 				'message' => 'Missing startTime'),

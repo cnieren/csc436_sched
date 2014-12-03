@@ -28,7 +28,13 @@ class HomeController extends BaseController {
 	public function showAppointments()
 	{
 		$user = Auth::user();
-		$data['appointments'] = $user->appointments();
+		$data['appointments'] = $user->appointments;
+
+		foreach ($data['appointments'] as $appointment) {
+			$appointment->title = Category::find($appointment->category_id)->name;
+			$appointment->advisor = "Timmy Garrabrant";
+			// return json_encode($appointment->users);// = $appointment->users->pivot->where('is_advising',1)->get();
+		}
 
 		$this->layout->content = View::make('advisor.appointments',
 			$data);

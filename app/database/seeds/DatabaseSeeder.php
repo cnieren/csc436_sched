@@ -92,6 +92,14 @@ class UserTableSeeder extends Seeder {
 									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));		
+
+		User::create(array('fname' => 'Big',
+									'lname' => 'Meech',
+									'email' => 'bmeech@email.arizona.edu',
+									'phone' => '520-555-5447',
+									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
+									'is_active' => true
+									));	
 	}
 }
 
@@ -122,7 +130,11 @@ class UserRolesTableSeeder extends Seeder {
 
 		// Ravi is a student
 		DB::table('user_roles')->insert(array('user_id' => '4',
-															'role_id' => '1'));		
+															'role_id' => '1'));
+
+		// Big Meech is an advisor
+		DB::table('user_roles')->insert(array('user_id' => '5',
+															'role_id' => '2'));	
 	}
 }
 
@@ -146,6 +158,10 @@ class AdvisorCategoriesSeeder extends Seeder {
 		// Chad belongs to Graduate Students: Plan of Study
 		DB::table('advisor_categories')->insert(array('user_id' => '3',
 																		'category_id' => '3'));
+
+		// Big Meech belongs to Graduate Students: Assistantship
+		DB::table('advisor_categories')->insert(array('user_id' => '5',
+																		'category_id' => '2'));		
 	}
 }
 
@@ -155,16 +171,16 @@ class UnavailableSeeder extends Seeder {
 		$dt_start = Carbon::now();
 		$dt_end = Carbon::now();
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(9)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+		$dt_start->year(2014)->month(12)->day(8)->hour(9)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(8)->hour(9)->minute(30)->second(0);
 
 		// Timmy
 		Unavailable::create(array('user_id' => '2',
 											'start' => $dt_start,
 											'end' => $dt_end));
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(17)->minute(0)->second(0);
+		$dt_start->year(2014)->month(12)->day(8)->hour(12)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(8)->hour(17)->minute(0)->second(0);
 
 		// Timmy
 		Unavailable::create(array('user_id' => '2',
@@ -179,16 +195,16 @@ class UnavailableSeeder extends Seeder {
 											'start' => $dt_start,
 											'end' => $dt_end));
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(10)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(11)->minute(0)->second(0);
+		$dt_start->year(2014)->month(12)->day(3)->hour(10)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(3)->hour(11)->minute(0)->second(0);
 
 		// Chad
 		Unavailable::create(array('user_id' => '3',
 											'start' => $dt_start,
 											'end' => $dt_end));
 
-		$dt_start->year(2014)->month(11)->day(3)->hour(12)->minute(0)->second(0);
-		$dt_end->year(2014)->month(11)->day(3)->hour(15)->minute(15)->second(0);
+		$dt_start->year(2015)->month(1)->day(6)->hour(12)->minute(0)->second(0);
+		$dt_end->year(2015)->month(1)->day(6)->hour(15)->minute(15)->second(0);
 
 		// Chad
 		Unavailable::create(array('user_id' => '3',
@@ -218,6 +234,14 @@ class UnavailableSeeder extends Seeder {
 		Unavailable::create(array('user_id' => '3',
 											'start' => $dt_start,
 											'end' => $dt_end));
+
+		$dt_start->year(2014)->month(12)->day(5)->hour(8)->minute(0)->second(0);
+		$dt_end->year(2014)->month(12)->day(5)->hour(18)->minute(0)->second(0);
+
+		// Big Meech
+		Unavailable::create(array('user_id' => '5',
+											'start' => $dt_start,
+											'end' => $dt_end));		
 	}
 }
 

@@ -262,12 +262,7 @@ class AppointmentUsersSeeder extends Seeder {
 																		'user_id' => '1',
 																		'is_advising' => false));
 
-		// Timmy is advising appointment 2
-		DB::table('appointment_users')->insert(array('appointment_id' => '2',
-																		'user_id' => '2',
-																		'is_advising' => true));
-
-		// Chad is also advising appointment 2
+		// Chad is advising appointment 2
 		DB::table('appointment_users')->insert(array('appointment_id' => '2',
 																		'user_id' => '3',
 																		'is_advising' => true));

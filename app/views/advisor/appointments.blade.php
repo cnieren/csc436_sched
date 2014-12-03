@@ -9,11 +9,11 @@
 		<div class="inner-well-padding">
 			<table class="table table-hover">
 					<thead>
-						<td>Appointments</td>
-						<td>Advisor</td>
-						<td>Start Time</td>
-						<td>End Time</td>
-						<td>Cancel Appointment</td>
+						<td><Strong>Appointments</Strong></td>
+						<td><Strong>Advisor</Strong></td>
+						<td><Strong>Start Time</Strong></td>
+						<td><Strong>End Time</Strong></td>
+						<td><Strong>Cancel Appointment</Strong></td>
 					</thead>
 					@foreach ($appointments as $appointment)
 					<tr>

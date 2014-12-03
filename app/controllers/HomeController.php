@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class HomeController extends BaseController {
 
 	/*
@@ -37,6 +39,9 @@ class HomeController extends BaseController {
 
 		foreach ($data['appointments'] as $appointment) {
 			$appointment->title = Category::find($appointment->category_id)->name;
+
+			$appointment->start = Carbon::parse($appointment->start)->toDayDateTimeString();
+			$appointment->end = Carbon::parse($appointment->end)->toDayDateTimeString();
 
 			// This is the hackish...and slow!..way to find out who is really the adviser
 			$allUsers = $appointment->users;

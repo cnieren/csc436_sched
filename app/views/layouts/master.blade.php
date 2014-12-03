@@ -25,9 +25,9 @@
 					<span class="icon-bar"></span>
 				</button>
 				@if (isset($user))
-				<a class="navbar-brand" href="/"><i class="fa fa-calendar"></i> Slate</a>
+					<a class="navbar-brand" href="/"><i class="fa fa-calendar"></i> Slate</a>
 				@else
-					<a class="navbar-brand" href="#"><i class="fa fa-calendar"></i></a>
+					<a class="navbar-brand" href="/login"><i class="fa fa-calendar"></i> Slate</a>
 				@endif
 			</div>
 			@if (isset($user))
@@ -68,7 +68,7 @@
 	{{ HTML::script('assets/clndr/clndr.min.js') }}
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 	{{ HTML::script('js/handlebarsHelpers.js') }}
-	
+
 	@yield('js')
 </body>
 </html>

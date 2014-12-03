@@ -28,7 +28,7 @@ class HomeController extends BaseController {
 	public function showAppointments()
 	{
 		$user = Auth::user();
-		$data['appointments'] = $user->appointments;
+		$data['appointments'] = $user->appointments()->orderBy('start', 'ASC')->get();
 
 		foreach ($data['appointments'] as $appointment) {
 			$appointment->title = Category::find($appointment->category_id)->name;

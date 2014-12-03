@@ -96,6 +96,13 @@ class AppointmentAPIController extends BaseController {
 		// DOES NOT CURRENTLY SET 'is_advising' correctly ... need to fix
 		$advisor = User::find($input['advisor']);
 		$adv_appt = $advisor->appointments()->save($appointment);
+
+		// Return the advisorid and userid in the created appointment object
+		$appointment->user = $user->fname . ' ' . $user->lname;
+		$appointment->advisor = $advisor->fname . ' ' . $advisor->lname;
+		$appointment->category = Category::find($appointment->category_id)->name;
+		
+		return Response::json($appointment);
 	}
 
 	/**

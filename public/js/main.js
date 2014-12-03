@@ -68,8 +68,11 @@
         return my.categoryId;
       },
       remove: function() {
+        if (my.section === null) return;
+
         var el = my.section;
-        el.parentNode.removeChild(el);
+        el.remove();
+        adviserManager.remove();
       }
     };
 
@@ -174,7 +177,7 @@
         this.setupClndr();                
         
         var jsonUnavailables = jQuery.parseJSON(adviserManager.unavailables());
-        var jsonAppointments = jQuery.parseJSON(adviserManager.appointments());
+        var jsonAppointments = jQuery.parseJSON(adviserManager.appointments());        
 
         $('#calendar').fullCalendar('addEventSource', {
             events: jsonUnavailables,
@@ -217,15 +220,16 @@
       section: function() {
         return my.section;
       },
-      saveEvents: function() {
-        console.log("events/appointments should be saved now!");
-        
-        var loggedUserId = $('#logged-in-user-id').val();
+      saveEvents: function() {        
 
+        var loggedUserId = $('#logged-in-user-id').val();
+        var createdAppts = [];
+        var userCreatedEvents = getUserCreatedEvents();
+        var numOfEventsToCreate = userCreatedEvents.length;
         // For each event we have, lets create a new object
         // that has all the info we need , then create the appointment
         // thru the API.
-        jQuery.each(getUserCreatedEvents(), function(i, o) {
+        jQuery.each(userCreatedEvents, function(i, o) {
           var start = moment(o._start._d).format("YYYY-MM-DD HH:mm:ss");
           var end = moment(o._end._d).format("YYYY-MM-DD HH:mm:ss");
 
@@ -233,19 +237,25 @@
                       advisor:adviserManager.selectedId(),
                       studentId:loggedUserId,
                       start:start,
-                      end:end,
+                      end:end
                     };
 
           // POST each appointment to our API controller
-          var ajaxPost = jQuery.post('api/v1/appointments/', obj);
+          var ajaxPost = jQuery.post('api/v1/appointments/', obj)
+            .done(function(data) {
+              // Success   
+              createdAppts.push(data); 
+              // We don't actually want to show the confirmation panel
+              // until all the events have been created
+              // because AJAX is parallel..the second argument is a hack around this               
+              confirmationManager.showSection(createdAppts, numOfEventsToCreate);
+            })
+            .fail(function(data) {
+              // Log what failed
+              console.log(data.responseText);
+            })
           
-          ajaxPost.done(function(data) {
-            console.log(data);
-          });        
-        });
-
-        //confirmationManager.remove();
-        //confirmationManager.showSection();
+        }); 
       },     
       setupClndr: function() {
         $('#calendar').fullCalendar({
@@ -316,11 +326,19 @@
       appointments: null
     },
     that = {
-      showSection: function() {
-        var prevSection = calendarManager.section(),
+      showSection: function(data, count) {
+        // See line ~245 where count is passed in for the 
+        // explanation
+        if (data.length != count) {
+          return;
+        }
+
+        that.remove();
+        categoryManager.remove();
+        $('.jumbotron').remove();
+
         tmpl = Handlebars.getTemplate(my.template);
-        
-        prevSection.insertAdjacentHTML('afterend', tmpl());
+        $('#navbar-container').append(tmpl(data));
         my.section = document.getElementsByClassName('panel')[3];        
         Handlebars.scrollToDiv('confirmation-panel');
       },

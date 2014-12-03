@@ -79,12 +79,6 @@ class AppointmentAPIController extends BaseController {
 			);
 		}
 
-		/*$dt_start = Carbon::now();
-		$dt_end = Carbon::now();
-
-		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
-		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);*/
-
 		$appointment->category_id = $input['category'];
 		$appointment->start = $input['start'];
 		$appointment->end = $input['end'];
@@ -96,6 +90,10 @@ class AppointmentAPIController extends BaseController {
 		// DOES NOT CURRENTLY SET 'is_advising' correctly ... need to fix
 		$advisor = User::find($input['advisor']);
 		$adv_appt = $advisor->appointments()->save($appointment);
+
+		// Format the dates better
+		$appointment->start = Carbon::parse($appointment->start)->toDayDateTimeString();
+		$appointment->end = Carbon::parse($appointment->end)->toDayDateTimeString();
 
 		// Return the advisorid and userid in the created appointment object
 		$appointment->user = $user->fname . ' ' . $user->lname;

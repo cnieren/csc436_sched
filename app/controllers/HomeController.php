@@ -26,13 +26,14 @@ class HomeController extends BaseController {
 		if (!$user->isAdvisor()) {
 			$this->layout->content = View::make('index', $data);
 		} else {
+			return Redirect::to('/appointments');
 			$this->layout->content = View::make('advisorIndex');
 		}
 	}
 	public function showAppointments()
 	{
 		$user = Auth::user();
-		$data['appointments'] = $user->appointments;
+		$data['appointments'] = $user->appointments()->orderBy('start', 'ASC')->get();
 
 		foreach ($data['appointments'] as $appointment) {
 			$appointment->title = Category::find($appointment->category_id)->name;

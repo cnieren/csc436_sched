@@ -24,5 +24,7 @@
 @stop
 
 @section('js')
-{{ HTML::script('js/main.js') }}
+	@if(isset($user))
+		{{ HTML::script('js/main.js') }}
+	@endif
 @stop

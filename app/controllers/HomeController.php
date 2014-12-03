@@ -26,6 +26,7 @@ class HomeController extends BaseController {
 		if (!$user->isAdvisor()) {
 			$this->layout->content = View::make('index', $data);
 		} else {
+			return Redirect::to('/appointments');
 			$this->layout->content = View::make('advisorIndex');
 		}
 	}

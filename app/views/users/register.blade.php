@@ -18,6 +18,9 @@
     {{ Form::submit('Create Account', array('class'=>'btn btn-large btn-primary btn-block'))}}
 {{ Form::close() }}
 
+@stop
+
+@section('js')
 <script>
 $(document).ready(function() {
     $('#register').validate({

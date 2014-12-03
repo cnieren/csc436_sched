@@ -227,7 +227,7 @@ class AppointmentsSeeder extends Seeder {
 		$dt_start = Carbon::now();
 		$dt_end = Carbon::now();
 
-		$dt_start->year(2014)->month(12)->day(4)->hour(9)->minute(15)->second(0);
+		$dt_start->year(2014)->month(12)->day(4)->hour(9)->minute(0)->second(0);
 		$dt_end->year(2014)->month(12)->day(4)->hour(9)->minute(30)->second(0);
 
 		Appointment::create(array('category_id' => '1',

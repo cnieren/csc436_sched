@@ -79,15 +79,15 @@ class AppointmentAPIController extends BaseController {
 			);
 		}
 
-		$dt_start = Carbon::now();
+		/*$dt_start = Carbon::now();
 		$dt_end = Carbon::now();
 
 		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
-		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);*/
 
 		$appointment->category_id = $input['category'];
-		$appointment->start = $dt_start;
-		$appointment->end = $dt_end;
+		$appointment->start = $input['start'];
+		$appointment->end = $input['end'];
 		$appointment->save();
 
 		$user = User::find($input['studentId']);

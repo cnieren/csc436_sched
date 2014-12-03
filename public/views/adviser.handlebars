@@ -8,7 +8,7 @@
         <div class="inner-well-padding">
             <p>Choose an advisor from the list below</p>
             <select id="adviser" class="form-control">
-                <option value="-1" selected>-- Select One --</option>
+                <option selected disabled>-- Select One --</option>
                 {{#each this}}
                 <option value="{{id}}">{{fname}} {{lname}}</option>
                 {{/each}}

@@ -20,6 +20,7 @@
 						<td>You have no upcoming appointments</td>
 					</tr>
 				</table>
+
 		</div>
 	</div>
 </div>

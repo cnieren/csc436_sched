@@ -10,15 +10,25 @@
 			<table class="table table-hover">
 					<thead>
 						<td>Appointments</td>
+						<td>Advisor</td>
+						<td>Start Time</td>
+						<td>End Time</td>
+						<td>Cancel Appointment</td>
 					</thead>
 					@foreach ($appointments as $appointment)
 					<tr>
-						<td>{{$appointment->start_time}}</td>
+						<td>{{$appointment->title}}</td>
+						<td>{{$appointment->advisor}}</td>
+						<td>{{$appointment->start}}</td>
+						<td>{{$appointment->end}}</td>
+						<td><a onclick="alert({{$appointment->id}})" class="glyphicon glyphicon-remove"></a></td>
 					</tr>
 					@endforeach
+					@if($appointments->count() == 0)
 					<tr>
 						<td>You have no upcoming appointments</td>
 					</tr>
+					@endif
 				</table>
 
 		</div>

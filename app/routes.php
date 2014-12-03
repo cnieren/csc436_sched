@@ -22,7 +22,7 @@ Route::group(array('before' => 'auth'), function()
 {
 
 	Route::get('/', 'HomeController@showIndex');
-	//Route::get('/appointments', 'HomeController@showAppointments');
+	Route::get('/appointments', 'HomeController@showAppointments');
 	Route::get('/schedule', 'HomeController@showSchedule');
 
 	// Main API

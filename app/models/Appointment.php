@@ -14,12 +14,13 @@ class Appointment extends Eloquent
 
 	public function users()
 	{
-		$this->hasMany('User');
+		return $this->belongsToMany('User','appointment_users','appointment_id','user_id');
+
 	}
 
 	public function category()
 	{
-		$this->belongsTo('Category');
+		return $this->belongsTo('Category');
 	}
 
 }

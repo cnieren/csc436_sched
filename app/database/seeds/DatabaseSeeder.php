@@ -64,7 +64,7 @@ class UserTableSeeder extends Seeder {
 		User::create(array('fname' => 'Homero',
 									'lname' => 'Pawlowski',
 									'email' => 'homeski@email.arizona.edu',
-									'phone' => '520555555',
+									'phone' => '520-555-5555',
 									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
@@ -72,7 +72,7 @@ class UserTableSeeder extends Seeder {
 		User::create(array('fname' => 'Timmy',
 									'lname' => 'Garrabrant',
 									'email' => 'timmy@email.arizona.edu',
-									'phone' => '520555556',
+									'phone' => '520-555-5565',
 									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
@@ -80,10 +80,18 @@ class UserTableSeeder extends Seeder {
 		User::create(array('fname' => 'Chad',
 									'lname' => 'Nierenhausen',
 									'email' => 'chad@email.arizona.edu',
-									'phone' => '520555557',
+									'phone' => '520-555-5575',
 									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
 									'is_active' => true
 									));
+
+		User::create(array('fname' => 'Ravi',
+									'lname' => 'Sethi',
+									'email' => 'rsethi@email.arizona.edu',
+									'phone' => '520-555-5557',
+									'password' => '$2y$10$OEipbmjQHgCa8445K/SKcO8icDji7hH/5xhklU27hEQhUrY3u7KW.',
+									'is_active' => true
+									));		
 	}
 }
 
@@ -111,6 +119,10 @@ class UserRolesTableSeeder extends Seeder {
 		// Chad is an advisor
 		DB::table('user_roles')->insert(array('user_id' => '3',
 															'role_id' => '2'));
+
+		// Ravi is a student
+		DB::table('user_roles')->insert(array('user_id' => '4',
+															'role_id' => '1'));		
 	}
 }
 

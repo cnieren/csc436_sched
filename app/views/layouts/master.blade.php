@@ -25,7 +25,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				@if (isset($user))
-				<a class="navbar-brand" href="/"><i class="fa fa-calendar"></i> Schedule an Appointment</a>
+				<a class="navbar-brand" href="/"><i class="fa fa-calendar"></i> Slate</a>
 				@else
 					<a class="navbar-brand" href="#"><i class="fa fa-calendar"></i></a>
 				@endif

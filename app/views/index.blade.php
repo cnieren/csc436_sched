@@ -1,4 +1,5 @@
 @section('content')
+<input type="hidden" id="logged-in-user-id" value="<?php echo Auth::User()->id ?>" />
 <div class="jumbotron">
 	<h1>Welcome!</h1>
 	<p>Please complete the steps below to schedule an appointment with a CS advisor.</p>

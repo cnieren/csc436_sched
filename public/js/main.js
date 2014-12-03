@@ -219,9 +219,9 @@
       },
       saveEvents: function() {
         console.log("events/appointments should be saved now!");
-
-        var appointments = [];
         
+        var loggedUserId = $('#logged-in-user-id').val();
+
         // For each event we have, lets create a new object
         // that has all the info we need , then create the appointment
         // thru the API.
@@ -231,7 +231,7 @@
 
           var obj = { category:categoryManager.categoryId(),
                       advisor:adviserManager.selectedId(),
-                      studentId:1, // Don't know how to get studentID yet ....
+                      studentId:loggedUserId,
                       start:start,
                       end:end,
                     };

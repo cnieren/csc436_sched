@@ -53,6 +53,7 @@
 	</nav>
 	<!-- end navbar -->
 	<div class="container">
+		<input type="hidden" id="logged-in-user-id" value="<?php echo Auth::User()->id ?>" />
 		@yield('content')
 	</div>
 
@@ -65,7 +66,6 @@
 	{{ HTML::script('assets/clndr/clndr.min.js') }}
 
 	{{ HTML::script('js/handlebarsHelpers.js') }}
-	{{ HTML::script('js/main.js') }}
 	@yield('js')
 </body>
 </html>

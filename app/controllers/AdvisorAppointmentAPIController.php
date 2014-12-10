@@ -22,10 +22,10 @@ class AdvisorAppointmentAPIController extends BaseController {
 				$allUsers = $value->users;
 
 				if ($allUsers[0]->id == $loggedInUserId || $allUsers[0]->id == $loggedInUserId) {
-					$value->color = 'green';
+					//$value->color = 'green';
 					$value->title = $value->title . ' with you!';
 				} else {
-					$value->color = 'yellow';
+					//$value->color = 'yellow';
 				}								
 			}
 

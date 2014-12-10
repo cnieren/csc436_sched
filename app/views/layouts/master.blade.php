@@ -59,6 +59,7 @@
 		@yield('content')
 	</div>
 
+	<!-- Libraries -->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 	{{ HTML::script('assets/handlebars/handlebars.min.js') }}
@@ -67,8 +68,13 @@
 	{{ HTML::script('assets/fullcalendar/dist/fullcalendar.min.js') }}
 	{{ HTML::script('assets/clndr/clndr.min.js') }}
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-	{{ HTML::script('js/handlebarsHelpers.js') }}
 
+	<!-- Modules -->
+	{{ HTML::script('js/handlebarsHelpers.js') }}
+	{{ HTML::script('js/Slate/utils.js') }}
+	{{ HTML::script('js/Slate/calendar.js') }}
+
+	<!-- Page Specific JS -->
 	@yield('js')
 </body>
 </html>

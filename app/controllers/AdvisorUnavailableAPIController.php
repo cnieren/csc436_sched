@@ -108,9 +108,31 @@ class AdvisorUnavailableAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
+	public function update($advisor_id, $unavailable_id) {
+		$event = Unavailable::find($unavailable_id);
+		$input = Input::all();
 
-	public function update($appointment_id) {
+		if(isset($input['start'])) {
+			$event->start = Carbon::parse($input['start'])->toDateTimeString();
+		}
 
+		if(isset($input['end'])) {
+			$event->end = Carbon::parse($input['end'])->toDateTimeString();
+		}
+
+		$start = Carbon::parse($event->start);
+		$end = Carbon::parse($event->end);
+
+		// Check that start is before end
+		if($start->gt($end)) {
+			return Response::json(array(
+				'message' => 'Start can not be after end'),
+			400);
+		}
+
+		$event->save();
+
+		return Response::json($event);
 	}
 
 	/**
@@ -120,9 +142,8 @@ class AdvisorUnavailableAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
-	public function destroy($appointment_id) {
-
+	public function destroy($advisor_id, $unavailable_id) {
+		Unavailable::destroy($unavailable_id);
 	}
 
 }

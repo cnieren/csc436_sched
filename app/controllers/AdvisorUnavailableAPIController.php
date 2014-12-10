@@ -35,7 +35,9 @@ class AdvisorUnavailableAPIController extends BaseController {
 
 		// Make sure advisor exists
 		if ($advisor== null) {
-			return '[{"error": "Advisor does not exist"]}';
+			return Response::json(array(
+				'message' => 'Adviser does not exist'),
+			400);
 		}
 
 		if ($filter_date == "*") {
@@ -50,7 +52,9 @@ class AdvisorUnavailableAPIController extends BaseController {
 				$dt = Carbon::now();
 				$dt->createFromFormat('Y-m-d', $filter_date);
 			} catch (InvalidArgumentException $e) {
-				return '[{"error": "Invalid date"]}';
+				return Response::json(array(
+					'message' => 'Invalid date'),
+				400);
 			}
 
 			$min = $filter_date." 00:00:00";
@@ -73,19 +77,28 @@ class AdvisorUnavailableAPIController extends BaseController {
 
 	public function store($advisor_id)
 	{
-		$newUnavailable = new Unavailable;
-		$newUnavailable->user_id = $advisor_id;
+		$unavailable = new Unavailable;
+		$input = Input::all();
 
-		$dt_start = Carbon::now();
-		$dt_end = Carbon::now();
+		if(!array_key_exists('start', $input)) {
+			return Response::json(array(
+				'message' => 'Missing start date'),
+			400);
+		}
 
-		$dt_start->year(2004)->month(11)->day(3)->hour(9)->minute(15)->second(0);
-		$dt_end->year(2004)->month(11)->day(3)->hour(9)->minute(30)->second(0);
+		if(!array_key_exists('end', $input)) {
+			return Response::json(array(
+				'message' => 'Missing end date'),
+			400);
+		}
 
-		$newUnavailable->start_time = $dt_start;
-		$newUnavailable->start_time = $dt_end;
+		$unavailable->user_id = $advisor_id;
+		$unavailable->start = $input['start'];
+		$unavailable->end = $input['end'];
 
-		$newUnavailable->save();
+		$unavailable->save();
+
+		return Response::json($unavailable);
 	}
 
 	/**

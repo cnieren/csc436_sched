@@ -12,7 +12,6 @@ class AppointmentAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
 	public function index()
 	{
 		$appointments = Appointment::all();
@@ -26,7 +25,6 @@ class AppointmentAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
 	public function show($appointment_id)
 	{
 		$appointment = Appointment::find($appointment_id);
@@ -41,7 +39,6 @@ class AppointmentAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
 	public function store()
 	{
 		$appointment = new Appointment;
@@ -110,13 +107,39 @@ class AppointmentAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
 	public function update($appointment_id) {
 		$appointment = Appointment::find($appointment_id);
 		$input = Input::all();
 
+		if(isset($input['category_id'])) {
+			$appointment->category_id = $input['category_id'];
+		}
+
+		if(isset($input['title'])) {
+			$appointment->title = $input['title'];
+		}
+
+		if(isset($input['start'])) {
+			$appointment->start = Carbon::parse($input['start'])->toDateTimeString();
+		}
+
+		if(isset($input['end'])) {
+			$appointment->end = Carbon::parse($input['end'])->toDateTimeString();
+		}
+
+		$start = Carbon::parse($appointment->start);
+		$end = Carbon::parse($appointment->end);
+
+		// Check that start is before end
+		if($start->gt($end)) {
+			return Response::json(array(
+				'message' => 'Start can not be after end'),
+			400);
+		}
 
 		$appointment->save();
+
+		return Response::json($appointment);
 	}
 
 	/**
@@ -126,19 +149,8 @@ class AppointmentAPIController extends BaseController {
 	 * @return Response
 	 *
 	 */
-
 	public function destroy($appointment_id) {
-		//$loggedInUser = Auth::user();
-
-		//$loggedInUser->appointments->delete();
-
 		DB::table('appointment_users')->where('appointment_id', '=', $appointment_id)->delete();
 		DB::table('appointments')->where('id', '=', $appointment_id)->delete();
-
-		//$appointment = Appointment::find($appointment_id);
-		//$appointment->delete();
-
-		//return Response::json({"msg":"success!"});
 	}
-
 }

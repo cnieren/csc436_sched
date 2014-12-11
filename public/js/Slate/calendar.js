@@ -8,6 +8,7 @@ Slate.calendar = (function($, undefined) {
         eventTemplate = {
             title: 'Available',
             isNew: true,
+            isModified: false
         },
         removedEvents = [],
         defaults = {
@@ -174,6 +175,71 @@ Slate.calendar = (function($, undefined) {
         return removedEvents;
     }
 
+    function saveChanges(userId) {
+        if(!userId)
+            return;
+
+        return new Promise(function(resolve, reject) {
+            var appointmentUrl = 'api/v1/appointments/',
+                unavailablesUrl = 'api/v1/advisors/' + userId + '/unavailable/',
+                dateTime = 'YYYY-MM-DD HH:mm:ss',
+                ops = [];
+
+            getNewEvents().forEach(function(elem) {
+                var data = {
+                    user_id: userId,
+                    start: elem.start.format(dateTime),
+                    end: elem.end.format(dateTime)
+                };
+                ops.push(Slate.utils.post(unavailablesUrl, data));
+                elem.isNew = false;
+            });
+
+            // Save modified unavailables and appointments
+            getModifiedEvents().forEach(function(elem) {
+                var id = elem.id,
+                    data = {
+                        start: elem.start.format(dateTime),
+                        end: elem.end.format(dateTime)
+                    };
+
+                if(elem.type === 'appointment') {
+                    ops.push(Slate.utils.put(appointmentUrl + id, data));
+                } else if (elem.type === 'unavailable') {
+                    ops.push(Slate.utils.put(unavailablesUrl + id, data));
+                }
+
+                elem.isModified = false;
+            });
+
+            // Save deleted unavailables and appointments
+            getDeletedEvents().forEach(function(elem) {
+                var id = elem.id;
+
+                if(elem.type === 'appointment') {
+                    ops.push(Slate.utils.destroy(appointmentUrl + id));
+                } else if (elem.type === 'unavailable') {
+                    ops.push(Slate.utils.destroy(unavailablesUrl + id));
+                }
+            });
+
+            Promise.all(ops).then(function() {
+                removedEvents = [];
+                resolve('success');
+            }, function() {
+                reject('fail');
+            });
+        });
+    }
+
+    /**
+     * Remove markers from events that were created, modified or removed
+     *
+     */
+    function clearEvents() {
+        removedEvents = [];
+    }
+
     /**
      * Extend the behavior of the calendar when an event is dropped
      * after being dragged from its origional location
@@ -217,6 +283,7 @@ Slate.calendar = (function($, undefined) {
         setEventTemplate: setEvent,
         display: displayCalendar,
         setEventDrop: eventDrop,
-        setEventResize: eventResize
+        setEventResize: eventResize,
+        saveChanges: saveChanges
     };
 })(jQuery);

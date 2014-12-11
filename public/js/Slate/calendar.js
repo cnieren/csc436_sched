@@ -186,22 +186,19 @@ Slate.calendar = (function($, undefined) {
                 ops = [];
 
             getNewEvents().forEach(function(elem) {
-                var data = {
-                    user_id: userId,
-                    start: elem.start.format(dateTime),
-                    end: elem.end.format(dateTime)
-                };
-                ops.push(Slate.utils.post(unavailablesUrl, data));
+                var data = Slate.utils.parseEvent(elem);
+                ops.push(Slate.utils.post(unavailablesUrl, data)
+                    .then(function(data) {
+                        var event = $el.fullCalendar('clientEvents', data.oldId)[0];
+                        Slate.utils.defineProperty(event, 'id', data.id);
+                    }));
                 elem.isNew = false;
             });
 
             // Save modified unavailables and appointments
             getModifiedEvents().forEach(function(elem) {
                 var id = elem.id,
-                    data = {
-                        start: elem.start.format(dateTime),
-                        end: elem.end.format(dateTime)
-                    };
+                    data = Slate.utils.parseEvent(elem);
 
                 if(elem.type === 'appointment') {
                     ops.push(Slate.utils.put(appointmentUrl + id, data));
@@ -230,14 +227,6 @@ Slate.calendar = (function($, undefined) {
                 reject('fail');
             });
         });
-    }
-
-    /**
-     * Remove markers from events that were created, modified or removed
-     *
-     */
-    function clearEvents() {
-        removedEvents = [];
     }
 
     /**

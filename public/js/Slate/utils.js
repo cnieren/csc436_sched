@@ -91,6 +91,41 @@ Slate.utils = (function($, undefined) {
         Object.defineProperty(obj, key, config);
     }
 
+    /**
+     * Parse out just the appointment data from a calendar event
+     * 
+     * @param  {object} event The calendar event to pull the data out of
+     * @return {object}       Just the Appointment data from the event
+     */
+    /**
+     * Parse out just the unavailable data from a calendar event
+     * 
+     * @param  {object} event The calendar event to pull the data out of
+     * @return {object}       Just the Unavailable data from the event
+     */
+    function parseEvent(event) {
+        var result = {},
+            dateTime = 'YYYY-MM-DD HH:mm:ss';
+
+        if(event.hasOwnProperty('id')) 
+            result.id = event.id;
+        else if(event.hasOwnProperty('_id'))
+            result.oldId = event._id;
+        
+        if(event.hasOwnProperty('user_id'))
+            result.user_id = event.user_id;
+        if(event.hasOwnProperty('category_id'))
+            result.category_id = event.category_id;
+        if(event.hasOwnProperty('title'))
+            result.title = event.title;
+        if(event.hasOwnProperty('start'))
+            result.start = event.start.format(dateTime);
+        if(event.hasOwnProperty('end'))
+            result.end = event.end.format(dateTime);
+
+        return result;
+    }
+
     // The public interface for this module
     return {
         get: get,
@@ -98,7 +133,8 @@ Slate.utils = (function($, undefined) {
         post: post,
         put: put,
         destroy: destroy,
-        defineProperty: defineProperty
+        defineProperty: defineProperty,
+        parseEvent: parseEvent,
     };
     
 })(jQuery);

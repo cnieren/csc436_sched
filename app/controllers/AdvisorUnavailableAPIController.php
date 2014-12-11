@@ -98,6 +98,9 @@ class AdvisorUnavailableAPIController extends BaseController {
 
 		$unavailable->save();
 
+		if(isset($input['oldId']))
+			$unavailable->oldId = $input['oldId'];
+
 		return Response::json($unavailable);
 	}
 

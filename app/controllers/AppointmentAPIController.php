@@ -1,7 +1,5 @@
 <?php
 
-
-
 use Carbon\Carbon;
 
 class AppointmentAPIController extends BaseController {

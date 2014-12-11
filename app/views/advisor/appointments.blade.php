@@ -16,7 +16,7 @@
 						<td><Strong>Cancel Appointment</Strong></td>
 					</thead>
 					@foreach ($appointments as $appointment)
-					<tr>
+					<tr data-id="{{$appointment->id}}">
 						<td>{{$appointment->title}}</td>
 						<td>{{$appointment->advisor}}</td>
 						<td>{{$appointment->start}}</td>
@@ -34,15 +34,26 @@
 		</div>
 	</div>
 </div>
+@stop
+
+@section('js')
 <script>
 function deleteAppt(id) {
-	$.ajax({
-	    url: 'api/v1/appointments/' + id,
-	    type: 'DELETE',
-	    success: function(result) {
-	        location.reload();
-	    }
+	var url = 'api/v1/appointments/' + id;
+
+	Slate.utils.destroy(url)
+	.then(function(data) {
+		var rows = $('tr').length;
+		$('[data-id=' + data.id + ']').fadeOut('slow', function() {
+			$(this).remove();
+			if(rows < 3) {
+				$('<tr style="display:none;"><td>You have no upcomming appointments</td></tr>')
+				.appendTo('tbody')
+				.fadeIn('slow');
+			}
+		});
 	});
 }
 </script>
 @stop
+

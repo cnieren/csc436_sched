@@ -94,7 +94,7 @@ class AppointmentAPIController extends BaseController {
 		$appointment->user = $user->fname . ' ' . $user->lname;
 		$appointment->advisor = $advisor->fname . ' ' . $advisor->lname;
 		$appointment->category = Category::find($appointment->category_id)->name;
-		
+
 		return Response::json($appointment);
 	}
 
@@ -150,5 +150,6 @@ class AppointmentAPIController extends BaseController {
 	public function destroy($appointment_id) {
 		DB::table('appointment_users')->where('appointment_id', '=', $appointment_id)->delete();
 		DB::table('appointments')->where('id', '=', $appointment_id)->delete();
+		return Response::json(array('id' => $appointment_id));
 	}
 }

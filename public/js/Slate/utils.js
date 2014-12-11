@@ -84,7 +84,7 @@ Slate.utils = (function($, undefined) {
     function defineProperty(obj, key, value) {
         var config = {
             value: value,
-            writeable: true,
+            writable: true,
             enumerable: true,
             configurable: true
         };
